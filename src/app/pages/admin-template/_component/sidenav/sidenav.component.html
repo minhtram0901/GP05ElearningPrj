@@ -1,0 +1,21 @@
+<mat-nav-list>
+  <div class="logo py-4">
+    <img
+      src="../../../../../favicon.ico"
+      style="width: 40px; height: 40px"
+      alt="Company Logo"
+    />
+  </div>
+  <mat-divider></mat-divider>
+  <!-- <h1 matSubheader class="mt-2">DASHBOARD</h1> -->
+
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/dashboard">
+    <mat-icon>home</mat-icon> Dashboard
+  </a>
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/user">
+    <mat-icon>create</mat-icon> Quản lý người dùng
+  </a>
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/course">
+    <mat-icon>create</mat-icon> Quản lý khóa học
+  </a>
+</mat-nav-list>

@@ -1,0 +1,14 @@
+<!-- <app-header-admin></app-header-admin>
+<router-outlet></router-outlet>
+<app-sidenav></app-sidenav> -->
+<mat-drawer-container>
+  <mat-drawer mode="side" [opened]="sideBarOpen">
+    <app-sidenav></app-sidenav>
+  </mat-drawer>
+  <mat-drawer-content>
+    <app-header-admin
+      (toggleSidebarForMe)="sideBarToggler()"
+    ></app-header-admin>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
