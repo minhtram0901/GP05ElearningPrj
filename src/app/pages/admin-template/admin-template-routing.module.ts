@@ -7,6 +7,12 @@ const routes: Routes = [
     path: '',
     component: AdminTemplateComponent,
     children: [
+      // admin redirect to /admin/dashboard
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      }, 
       // dashboard
       {
         path: 'dashboard',
