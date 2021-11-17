@@ -25,6 +25,14 @@ const routes: Routes = [
         (m) => m.AdminTemplateModule
       ),
   },
+  // page not found
+  {
+    path: '**',
+    loadChildren: () =>
+      import('./pages/page-not-found/page-not-found.module').then(
+        (m) => m.PageNotFoundModule
+      ),
+  },
 ];
 
 @NgModule({

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthAdminGuard } from 'src/app/_core/guards/auth-admin.guard';
 import { AdminTemplateComponent } from './admin-template.component';
 
 const routes: Routes = [
@@ -36,6 +37,7 @@ const routes: Routes = [
           ),
       },
     ],
+    canActivate: [AuthAdminGuard]
   },
 ];
 
