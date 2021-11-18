@@ -1,9 +1,36 @@
 <div class="container-fluid page">
   <div class="d-flex page__box p-3 mt-2"></div>
-  <div class="page__content shadow p-3 position-relative">
-    <div class="page__content-data position-absolute text-center">
-      Course Management Content Goes Here
+  <div class="page__content shadow p-3">
+    <div class="page__content-data text-center">
+      <h1>Danh sách khóa học</h1>
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Danh mục khóa học</th>
+            <th scope="col">Tên khóa học</th>
+            <th scope="col">Ngày tạo</th>
+            <th scope="col">Người tạo</th>
+            <th scope="col">Chỉnh sửa</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let course of listCourse; let stt = index">
+            <th scope="row">{{ stt + 1 }}</th>
+            <td>{{ course.danhMucKhoaHoc.tenDanhMucKhoaHoc }}</td>
+            <td>{{ course.tenKhoaHoc }}</td>
+            <td>{{ course.ngayTao }}</td>
+            <td>{{ course.nguoiTao.taiKhoan }}</td>
+            <td>
+              <button class="btn btn-success table-btn mr-1">
+                <mat-icon>create</mat-icon></button
+              ><button class="btn btn-danger table-btn">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    
   </div>
 </div>
