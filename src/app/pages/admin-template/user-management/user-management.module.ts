@@ -4,8 +4,14 @@ import { MaterialModule } from 'src/app/_core/shares/material-module';
 import { UserManagementRoutingModule } from './user-management-routing.module';
 import { UserManagementComponent } from './user-management.component';
 
+
 @NgModule({
   declarations: [UserManagementComponent],
-  imports: [CommonModule, UserManagementRoutingModule, MaterialModule],
+  imports: [
+    CommonModule,
+    UserManagementRoutingModule,
+    MaterialModule,
+
+  ],
 })
 export class UserManagementModule {}

@@ -3,20 +3,36 @@
   <div class="page__content shadow p-3">
     <div class="page__content-data text-center">
       <h1>Danh sách khóa học</h1>
+      <nav class="navbar">
+        <input
+          class="form-control"
+          type="text"
+          name="tenKhoaHoc"
+          [(ngModel)]="tenKhoaHoc"
+          (ngModelChange)="Search()"
+          placeholder="Tên khóa học"
+        />
+      </nav>
       <table class="table">
         <thead class="thead-light">
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">Danh mục khóa học</th>
-            <th scope="col">Tên khóa học</th>
-            <th scope="col">Ngày tạo</th>
-            <th scope="col">Người tạo</th>
+            <!-- <th (click)="sort('id')" scope="col">
+              #&nbsp;&nbsp;<i class="fa fa-sort"></i>
+            </th> -->
+            <th (click)="sort('danhMucKhoaHoc')" scope="col">
+              Danh mục khóa học&nbsp;&nbsp;<i class="fa fa-sort"></i>
+            </th>
+            <th (click)="sort('tenKhoaHoc')" scope="col">
+              Tên khóa học&nbsp;&nbsp;<i class="fa fa-sort"></i>
+            </th>
+            <th (click)="sort('ngayTao')" scope="col">Ngày tạo&nbsp;&nbsp;<i class="fa fa-sort"></i></th>
+            <th (click)="sort('nguoiTao')"  scope="col">Người tạo&nbsp;&nbsp;<i class="fa fa-sort"></i></th>
             <th scope="col">Chỉnh sửa</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let course of listCourse; let stt = index">
-            <th scope="row">{{ stt + 1 }}</th>
+          <tr *ngFor="let course of listCourse | orderBy: key:reserse | paginate : {itemsPerPage:5, currentPage:p} ; let stt = index">
+            <!-- <th scope="row">{{ stt  }}</th> -->
             <td>{{ course.danhMucKhoaHoc.tenDanhMucKhoaHoc }}</td>
             <td>{{ course.tenKhoaHoc }}</td>
             <td>{{ course.ngayTao }}</td>
@@ -30,6 +46,7 @@
             </td>
           </tr>
         </tbody>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
       </table>
     </div>
   </div>
