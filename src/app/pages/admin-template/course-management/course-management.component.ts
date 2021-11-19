@@ -58,7 +58,6 @@ export class CourseManagementComponent implements OnInit {
       this.ngOnInit();
     } else {
       this.sortedData = this.danhSachKhoaHoc.filter((item: any) => {
-        console.log(item);
         return removeVietnameseTones(item.tenKhoaHoc)
           .toLocaleLowerCase()
           .includes(removeVietnameseTones(this.tenKhoaHoc).toLocaleLowerCase());
@@ -69,7 +68,6 @@ export class CourseManagementComponent implements OnInit {
   sortData(sort: Sort) {
    
     const data = this.danhSachKhoaHoc.slice();
-    console.log("data", data, sort);
     if (!sort.active || sort.direction === '') {
       this.sortedData = data;
       return;
