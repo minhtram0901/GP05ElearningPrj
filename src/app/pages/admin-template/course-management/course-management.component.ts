@@ -1,6 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/_core/services/data.service';
 import { Subscription } from 'rxjs';
+import { Sort } from '@angular/material/sort';
+
+export interface KhoaHoc {
+  stt: number;
+  danhMucKhoaHoc: string;
+  tenKhoaHoc: string;
+  ngayTao: Date;
+  nguoiTao: string;
+}
 
 @Component({
   selector: 'app-course-management',
@@ -8,11 +17,15 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./course-management.component.scss'],
 })
 export class CourseManagementComponent implements OnInit {
+  danhSachKhoaHoc: KhoaHoc[] = [];
+  sortedData: KhoaHoc[] = [];
   listCourse: any;
   subListCourse = new Subscription();
   tenKhoaHoc: any;
   p: number = 1;
-  constructor(private data: DataService) {}
+  constructor(private data: DataService) {
+    this.sortedData = this.danhSachKhoaHoc.slice();
+  }
 
   ngOnInit(): void {
     this.getCourse();
@@ -21,8 +34,17 @@ export class CourseManagementComponent implements OnInit {
     this.subListCourse = this.data
       .get('QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=GP01')
       .subscribe((result: any) => {
-        console.log(result);
         this.listCourse = result;
+        this.danhSachKhoaHoc = this.listCourse.map((item: any, index: any) => {
+          return {
+            stt: index,
+            danhMucKhoaHoc: item.danhMucKhoaHoc.tenDanhMucKhoaHoc,
+            tenKhoaHoc: item.tenKhoaHoc,
+            ngayTao: item.ngayTao,
+            nguoiTao: item.nguoiTao.taiKhoan,
+          };
+        });
+        this.sortedData = this.danhSachKhoaHoc;
       });
   }
 
@@ -35,13 +57,41 @@ export class CourseManagementComponent implements OnInit {
     if (this.tenKhoaHoc == '') {
       this.ngOnInit();
     } else {
-      this.listCourse = this.listCourse.filter((item: any) => {
+      this.sortedData = this.danhSachKhoaHoc.filter((item: any) => {
         console.log(item);
         return removeVietnameseTones(item.tenKhoaHoc)
           .toLocaleLowerCase()
           .includes(removeVietnameseTones(this.tenKhoaHoc).toLocaleLowerCase());
       });
     }
+  }
+
+  sortData(sort: Sort) {
+   
+    const data = this.danhSachKhoaHoc.slice();
+    console.log("data", data, sort);
+    if (!sort.active || sort.direction === '') {
+      this.sortedData = data;
+      return;
+    }
+
+    this.sortedData = data.sort((a:any, b:any) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'stt':
+          return compare(a.stt, b.stt, isAsc);
+        case 'danhMucKhoaHoc':
+          return compare(a.danhMucKhoaHoc, b.danhMucKhoaHoc, isAsc);
+        case 'tenKhoaHoc':
+          return compare(a.tenKhoaHoc, b.tenKhoaHoc, isAsc);
+        case 'ngayTao':
+          return compare(a.ngayTao, b.ngayTao, isAsc);
+        case 'nguoiTao':
+          return compare(a.nguoiTao, b.nguoiTao, isAsc);
+        default:
+          return 0;
+      }
+    });
   }
 }
 
@@ -75,4 +125,8 @@ function removeVietnameseTones(str: string) {
     ' '
   );
   return str;
+}
+
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

@@ -1,7 +1,7 @@
 <div class="container-fluid page">
   <div class="d-flex page__box p-3 mt-2"></div>
   <div class="page__content shadow p-3">
-    <div class="page__content-data text-center ">
+    <div class="page__content-data text-center">
       <h3>Danh sách khóa học</h3>
       <nav class="navbar">
         <input
@@ -14,32 +14,35 @@
         />
       </nav>
       <div class="table-responsive table-container table table-sm">
-        <table class="table">
+        <table class="table" matSort (matSortChange)="sortData($event)">
           <thead class="thead-light">
             <tr>
-              <th style="width: 10%">#&nbsp;&nbsp;<i class="fa fa-sort"></i></th>
-              <th style="width: 20%">
-                Danh mục khóa học&nbsp;&nbsp;<i class="fa fa-sort"></i>
+              <th style="width: 10%" mat-sort-header="stt">STT</th>
+              <th style="width: 20%" mat-sort-header="danhMucKhoaHoc">
+                Danh mục khóa học
               </th>
-              <th style="width: 20%">Tên khóa học&nbsp;&nbsp;<i class="fa fa-sort"></i></th>
-              <th style="width: 10%">Ngày tạo&nbsp;&nbsp;<i class="fa fa-sort"></i></th>
-              <th style="width: 20%">Người tạo&nbsp;&nbsp;<i class="fa fa-sort"></i></th>
-              <th style="width: 20%">Chỉnh sửa</th>
+              <th style="width: 20%" mat-sort-header="tenKhoaHoc">
+                Tên khóa học
+              </th>
+              <th style="width: 10%" mat-sort-header="ngayTao">Ngày tạo</th>
+              <th style="width: 20%" mat-sort-header="nguoiTao">Người tạo</th>
+              <th style="width: 20%" mat-sort-header="edit">Chỉnh sửa</th>
             </tr>
           </thead>
           <tbody>
             <tr
+              style="text-align: left"
               *ngFor="
-                let course of listCourse
+                let course of sortedData
                   | paginate: { itemsPerPage: 5, currentPage: p };
                 let stt = index
               "
             >
-              <td>{{ stt + 1 + ((p - 1) * 5) }}</td>
-              <td>{{ course.danhMucKhoaHoc.tenDanhMucKhoaHoc }}</td>
+              <td>{{ course.stt + 1 }}</td>
+              <td>{{ course.danhMucKhoaHoc }}</td>
               <td>{{ course.tenKhoaHoc }}</td>
               <td>{{ course.ngayTao }}</td>
-              <td>{{ course.nguoiTao.taiKhoan }}</td>
+              <td>{{ course.nguoiTao }}</td>
               <td>
                 <button class="btn btn-success table-btn mr-1">
                   <mat-icon>create</mat-icon></button
@@ -51,8 +54,11 @@
           </tbody>
         </table>
       </div>
-      <pagination-controls (pageChange)="p = $event" previousLabel="Trang trước"
-        nextLabel="Trang sau"></pagination-controls>
+      <pagination-controls
+        (pageChange)="p = $event"
+        previousLabel="Trang trước"
+        nextLabel="Trang sau"
+      ></pagination-controls>
     </div>
   </div>
 </div>
