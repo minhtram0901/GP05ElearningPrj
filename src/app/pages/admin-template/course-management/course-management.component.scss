@@ -3,7 +3,7 @@
   padding: 0 1rem;
   background: #f1f5f9;
   &__box {
-    min-height: 120px;
+    min-height: 90px;
     background: #1e293b;
     margin: 0 -1rem;
     font-size: 36px;
@@ -14,18 +14,19 @@
     margin-top: -2rem;
     background: white;
     color: black;
-    font-size: .7rem;
-    // &-data {
-    //   top: 400%;
-    //   left: 50%;
-    //   transform: translate(-50%, -50%);
-    // }
+    font-size: 0.7rem;
   }
 }
-.page__content-data{
+.page__content-data {
   width: 90%;
 }
 
-.table-btn{
+.table-btn {
   padding: 2px 4px !important;
+}
+
+.table-container {
+  // height: 231px;
+  border: 1px solid #cccccc;
+  margin-bottom: 15px;
 }
