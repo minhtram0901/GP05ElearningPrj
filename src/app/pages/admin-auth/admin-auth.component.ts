@@ -23,6 +23,7 @@ export class AdminAuthComponent implements OnInit {
           this.router.navigate(['/admin/dashboard']);
         } else {
           // thong bao
+          alert('Bạn không có quyền truy cập');
         }
       });
   }

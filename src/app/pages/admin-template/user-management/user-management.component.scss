@@ -22,11 +22,29 @@
 }
 
 .table-btn {
-  padding: 2px 4px !important;
+  min-width: 35px !important;
+  width: 35px !important;
+  padding: 0;
+}
+.table-btn:focus {
+  outline: none;
 }
 
 .table-container {
   // height: 231px;
   border: 1px solid #cccccc;
   margin-bottom: 15px;
+}
+
+.addUserBtn{
+  // border: 1px solid #1e293b;
+  box-shadow: 2px 2px 5px #1e293b;
+}
+
+.addUserBtn:focus{
+  outline: none;
+}
+
+.material-icons {
+  vertical-align: -4px !important; /*Change this to adjust the icon*/
 }

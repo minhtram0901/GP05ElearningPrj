@@ -7,9 +7,10 @@ import { FormsModule } from '@angular/forms';
 import { Ng2OrderModule } from 'ng2-order-pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { AddUserComponent } from './add-user/add-user.component';
 
 @NgModule({
-  declarations: [UserManagementComponent],
+  declarations: [UserManagementComponent, AddUserComponent],
   imports: [
     CommonModule,
     UserManagementRoutingModule,
@@ -19,5 +20,6 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     NgxPaginationModule,
     Ng2SearchPipeModule,
   ],
+  entryComponents:[AddUserComponent]
 })
 export class UserManagementModule {}

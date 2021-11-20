@@ -2,13 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/_core/services/data.service';
 import { Subscription } from 'rxjs';
 import { Sort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
+import { AddCourseComponent } from './add-course/add-course.component';
 
 export interface KhoaHoc {
   stt: number;
   danhMucKhoaHoc: string;
+  maKhoaHoc: string;
   tenKhoaHoc: string;
   ngayTao: Date;
   nguoiTao: string;
+  biDanh: string;
+  moTa: string;
+  luotXem: number;
+  hinhAnh: number;
 }
 
 @Component({
@@ -23,7 +30,7 @@ export class CourseManagementComponent implements OnInit {
   subListCourse = new Subscription();
   tenKhoaHoc: any;
   p: number = 1;
-  constructor(private data: DataService) {
+  constructor(private data: DataService, private dialog: MatDialog) {
     this.sortedData = this.danhSachKhoaHoc.slice();
   }
 
@@ -39,9 +46,14 @@ export class CourseManagementComponent implements OnInit {
           return {
             stt: index,
             danhMucKhoaHoc: item.danhMucKhoaHoc.tenDanhMucKhoaHoc,
+            maKhoaHoc: item.maKhoaHoc,
             tenKhoaHoc: item.tenKhoaHoc,
             ngayTao: item.ngayTao,
             nguoiTao: item.nguoiTao.taiKhoan,
+            biDanh: item.biDanh,
+            moTa: item.moTa,
+            luotXem: item.luotXem,
+            hinhAnh: item.hinhAnh,
           };
         });
         this.sortedData = this.danhSachKhoaHoc;
@@ -66,22 +78,25 @@ export class CourseManagementComponent implements OnInit {
   }
 
   sortData(sort: Sort) {
-   
     const data = this.danhSachKhoaHoc.slice();
     if (!sort.active || sort.direction === '') {
       this.sortedData = data;
       return;
     }
 
-    this.sortedData = data.sort((a:any, b:any) => {
+    this.sortedData = data.sort((a: any, b: any) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
         case 'stt':
           return compare(a.stt, b.stt, isAsc);
         case 'danhMucKhoaHoc':
           return compare(a.danhMucKhoaHoc, b.danhMucKhoaHoc, isAsc);
+        case 'maKhoaHoc':
+          return compare(a.maKhoaHoc, b.maKhoaHoc, isAsc);
         case 'tenKhoaHoc':
           return compare(a.tenKhoaHoc, b.tenKhoaHoc, isAsc);
+        case 'biDanh':
+          return compare(a.biDanh, b.biDanh, isAsc);
         case 'ngayTao':
           return compare(a.ngayTao, b.ngayTao, isAsc);
         case 'nguoiTao':
@@ -90,6 +105,10 @@ export class CourseManagementComponent implements OnInit {
           return 0;
       }
     });
+  }
+
+  onCreate() {
+    this.dialog.open(AddCourseComponent);
   }
 }
 

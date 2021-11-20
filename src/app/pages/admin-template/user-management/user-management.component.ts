@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/_core/services/data.service';
 import { Subscription } from 'rxjs';
 import { Sort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
+import { AddUserComponent } from './add-user/add-user.component';
 
 export interface NguoiDung {
   stt: number;
@@ -24,7 +26,7 @@ export class UserManagementComponent implements OnInit {
   subListUser = new Subscription();
   tenNguoiDung: any;
   p: number = 1;
-  constructor(private data: DataService) {
+  constructor(private data: DataService, private dialog: MatDialog) {
     this.sortedData = this.danhSachNguoiDung.slice();
   }
 
@@ -95,6 +97,10 @@ export class UserManagementComponent implements OnInit {
           return 0;
       }
     });
+  }
+
+  onCreate(){
+    this.dialog.open(AddUserComponent);
   }
 }
 
