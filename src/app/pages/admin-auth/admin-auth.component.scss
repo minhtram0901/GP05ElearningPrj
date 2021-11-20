@@ -33,7 +33,10 @@ body {
 
 .box {
   position: relative;
-  top: 0;
+  top: 50%;
+  left: 50%;
+  margin-top: -145px;
+  margin-left: -145px;
   opacity: 1;
   float: left;
   padding: 60px 50px 40px 50px;
@@ -117,4 +120,3 @@ input.mat-input-element {
 // .mat-form-field{
 //   background-color: gray;
 // }
-

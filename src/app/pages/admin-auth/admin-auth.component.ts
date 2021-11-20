@@ -9,11 +9,10 @@ import { Router } from '@angular/router';
 })
 export class AdminAuthComponent implements OnInit {
   constructor(private data: DataService, private router: Router) {}
-
+  taiKhoan: string = "";
   ngOnInit(): void {}
 
   login(user: any) {
-    console.log(user);
     this.data
       .post('QuanLyNguoiDung/DangNhap', user)
       .subscribe((result: any) => {
