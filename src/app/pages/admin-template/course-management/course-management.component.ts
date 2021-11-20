@@ -97,6 +97,8 @@ export class CourseManagementComponent implements OnInit {
           return compare(a.tenKhoaHoc, b.tenKhoaHoc, isAsc);
         case 'biDanh':
           return compare(a.biDanh, b.biDanh, isAsc);
+        case 'luotXem':
+          return compare(a.luotXem, b.luotXem, isAsc);
         case 'ngayTao':
           return compare(a.ngayTao, b.ngayTao, isAsc);
         case 'nguoiTao':
