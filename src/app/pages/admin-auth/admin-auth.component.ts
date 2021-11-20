@@ -13,6 +13,7 @@ export class AdminAuthComponent implements OnInit {
   ngOnInit(): void {}
 
   login(user: any) {
+    console.log(user);
     this.data
       .post('QuanLyNguoiDung/DangNhap', user)
       .subscribe((result: any) => {

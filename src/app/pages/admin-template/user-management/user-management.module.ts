@@ -3,23 +3,28 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/_core/shares/material-module';
 import { UserManagementRoutingModule } from './user-management-routing.module';
 import { UserManagementComponent } from './user-management.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Ng2OrderModule } from 'ng2-order-pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { AddUserComponent } from './add-user/add-user.component';
+import { UserFormComponent } from './user-form/user-form.component';
+import { UserService } from '../_services/user.service';
 
 @NgModule({
-  declarations: [UserManagementComponent, AddUserComponent],
+  declarations: [UserManagementComponent, UserFormComponent, UserFormComponent],
   imports: [
     CommonModule,
     UserManagementRoutingModule,
     MaterialModule,
     FormsModule,
+    ReactiveFormsModule,
     Ng2OrderModule,
     NgxPaginationModule,
     Ng2SearchPipeModule,
   ],
-  entryComponents:[AddUserComponent]
+  providers: [
+    UserService
+  ],
+  entryComponents: [UserFormComponent],
 })
 export class UserManagementModule {}

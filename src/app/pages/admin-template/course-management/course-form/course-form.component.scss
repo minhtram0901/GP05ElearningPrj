@@ -1,0 +1,133 @@
+form.normal-form {
+  margin: 10px;
+}
+
+.controles-container {
+  width: 100%;
+  padding: 5%;
+}
+
+.controles-container > * {
+  width: 100%;
+}
+
+::ng-deep.mat-dialog-container {
+  background-color: white !important;
+  width: 70vw !important;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: green !important;
+}
+
+::ng-deep.mat-form-field-underline {
+  /*change color of underline*/
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Font color */
+input.mat-input-element {
+  color: black;
+  caret-color: black;
+  background-color: transparent;
+}
+
+textarea.mat-input-element {
+  height: 100px;
+  border: 1px solid #cccccc;
+  color: black;
+  caret-color: black;
+  background-color: transparent;
+}
+
+input::-webkit-input-placeholder {
+  color: #424242; /* change [placeholder color] by this*/
+  text-shadow: none;
+  -webkit-text-fill-color: initial;
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: rgb(66, 134, 244);
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+  color: rgb(66, 134, 244);
+  background-color: rgb(66, 134, 244);
+}
+
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+  background-color: rgb(255, 37, 37, 0.26);
+}
+
+.mat-radio-button {
+  margin-left: 16px;
+  color: black;
+}
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+  background-color: rgba(0, 0, 0, 0.7) !important; /*inner circle color change*/
+}
+
+::ng-deep.mat-radio-button.mat-accent.mat-radio-checked
+  .mat-radio-outer-circle {
+  border-color: rgba(0, 0, 0, 0.7) !important; /*outer ring color change*/
+}
+
+::ng-deep.mat-radio-button .mat-radio-outer-circle {
+  border-color: rgba(0, 0, 0, 0.7) !important; /*outer ring color change*/
+}
+
+.myLabel {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+::ng-deep.mat-select-panel {
+  background-color: white; //Select box panel
+}
+
+::ng-deep.mat-select{
+  background-color: white;
+}
+
+::ng-deep.mat-select-value {
+  color: black;
+}
+
+::ng-deep.mat-option-text {
+  color: black;
+}
+
+::ng-deep.mat-select-arrow {
+  color: black;
+}
+
+::ng-deep.mat-form-field-disabled{
+  background-color: #cccccc !important;
+}
+
+mat-datepicker-toggle {
+  color: black !important;
+ }
+
+ .myBtn{
+   outline: none !important;
+ }
+
+ .mat-raised-button.submitBtn{
+  background-color:rgb(74, 85, 240);
+} 
+
+/* to change arrow when focused */
+::ng-deep.mat-form-field .mat-select.mat-select-invalid .mat-select-arrow {
+  color: black !important;
+}
+
+::ng-deep.mat-form-field.mat-focused.mat-primary .mat-select-arrow{
+  color: black !important;
+}

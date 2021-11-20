@@ -1,0 +1,40 @@
+<form [formGroup]="userService.userForm" class="normal-form">
+    <mat-grid-list cols="2" rowHeight="300px">
+      <mat-grid-tile>
+        <div class="controles-container">
+          <input type="hidden" formControlName="$key" />
+          <mat-form-field>
+            <mat-label class="myLabel">Tài khoản</mat-label>
+            <input formControlName="taiKhoan" matInput type="text" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label class="myLabel">Mật khẩu</mat-label>
+            <input formControlName="matKhau" matInput type="password" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label class="myLabel">Họ tên</mat-label>
+            <input formControlName="hoTen" matInput type="text" />
+          </mat-form-field>
+          
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div class="controles-container">
+          <mat-form-field>
+            <mat-label class="myLabel">Số điện thoại</mat-label>
+            <input formControlName="soDT" matInput type="text" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label class="myLabel">Email</mat-label>
+            <input formControlName="soDT" matInput type="mail" />
+          </mat-form-field>
+          <label class="myLabel">Loại người dùng</label>
+          <mat-radio-group  formControlName="maLoaiNguoiDung">
+            <mat-radio-button value="1" >Giáo vụ</mat-radio-button>
+            <mat-radio-button value="2">Học viên</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+  

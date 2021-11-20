@@ -7,10 +7,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Ng2OrderModule } from 'ng2-order-pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { AddCourseComponent } from './add-course/add-course.component';
+import { CourseFormComponent } from './course-form/course-form.component';
 
 @NgModule({
-  declarations: [CourseManagementComponent, AddCourseComponent],
+  declarations: [CourseManagementComponent, CourseFormComponent],
   imports: [
     CommonModule,
     CourseManagementRoutingModule,
@@ -21,6 +21,6 @@ import { AddCourseComponent } from './add-course/add-course.component';
     NgxPaginationModule,
     Ng2SearchPipeModule,
   ],
-  entryComponents:[AddCourseComponent]
+  entryComponents:[]
 })
 export class CourseManagementModule {}

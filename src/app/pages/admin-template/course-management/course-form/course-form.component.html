@@ -1,0 +1,149 @@
+<!-- <mat-toolbar>
+  <span>Title</span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button tabIndex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar> -->
+<form [formGroup]="courseService.courseForm" class="normal-form">
+  <mat-grid-list cols="2" rowHeight="400px">
+    <mat-grid-tile>
+      <div class="controles-container">
+        <input type="hidden" formControlName="$key" />
+        <mat-form-field>
+          <mat-label class="myLabel">Mã khóa học *</mat-label>
+          <input formControlName="maKhoaHoc" matInput type="text" />
+          <mat-error
+            *ngIf="
+              courseService.courseForm.controls['maKhoaHoc'].errors?.required
+            "
+            >Vui lòng nhập mã khóa học</mat-error
+          >
+          <mat-error
+            *ngIf="
+              courseService.courseForm.controls['maKhoaHoc'].errors?.minlength
+            "
+            >Tên khóa học dài hơn 8 ký tự</mat-error
+          >
+          <mat-error
+            *ngIf="
+              courseService.courseForm.controls['maKhoaHoc'].errors?.maxlength
+            "
+            >Tên khóa học không quá 30 ký tự</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label class="myLabel">Bí danh</mat-label>
+          <input formControlName="biDanh" matInput type="text" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label class="myLabel">Danh mục khóa học *</mat-label>
+          <mat-select
+            formControlName="maDanhMucKhoaHoc"
+            [(ngModel)]="danhMucDaChon"
+            name="maDanhMucKhoaHoc"
+            placeholder="Danh mục khóa học"
+          >
+            <mat-option
+              *ngFor="let item of listDanhMuc; let stt = index"
+              [value]="item.maDanhMuc"
+            >
+              {{ item.tenDanhMuc }}
+            </mat-option>
+          </mat-select>
+          <mat-error>Vui lòng chọn danh mục</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label class="myLabel">Tên khóa học *</mat-label>
+          <input formControlName="tenKhoaHoc" matInput type="text" />
+          <mat-error
+            *ngIf="
+              courseService.courseForm.controls['tenKhoaHoc'].errors?.required
+            "
+            >Vui lòng nhập tên khóa học</mat-error
+          >
+          <mat-error
+            *ngIf="
+              courseService.courseForm.controls['tenKhoaHoc'].errors?.minlength
+            "
+            >Tên khóa học dài hơn 2 ký tự</mat-error
+          >
+          <mat-error
+            *ngIf="
+              courseService.courseForm.controls['tenKhoaHoc'].errors?.maxlength
+            "
+            >Tên khóa học không quá 30 ký tự</mat-error
+          >
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label class="myLabel">Liên kết hình ảnh</mat-label>
+          <input formControlName="hinhAnh" matInput type="text" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label class="myLabel">Lượt xem</mat-label>
+          <input formControlName="luotXem" matInput type="number" min="0" />
+          <mat-error
+            *ngIf="courseService.courseForm.controls['luotXem'].errors?.min"
+            >Lượt xem phải lớn hơn hoặc bằng 0</mat-error
+          >
+        </mat-form-field>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="controles-container">
+        <mat-form-field>
+          <mat-label class="myLabel">Đánh giá</mat-label>
+          <input
+            formControlName="danhGia"
+            matInput
+            type="number"
+            min="0"
+            max="5"
+          />
+          <mat-error
+            *ngIf="courseService.courseForm.controls['danhGia'].errors?.min"
+            >Đánh giá phải từ 0 đến 5</mat-error
+          >
+          <mat-error
+            *ngIf="courseService.courseForm.controls['danhGia'].errors?.max"
+            >Đánh giá phải từ 0 đến 5</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label class="myLabel">Mô tả</mat-label>
+          <textarea formControlName="moTa" matInput type="text"></textarea>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label class="myLabel">Người tạo *</mat-label>
+          <input formControlName="nguoiTao" matInput type="text" />
+          <mat-error
+            *ngIf="
+              courseService.courseForm.controls['nguoiTao'].errors?.required
+            "
+            >Vui lòng nhập tên người tạo</mat-error
+          >
+          <mat-error
+            *ngIf="
+              courseService.courseForm.controls['nguoiTao'].errors?.minlength
+            "
+            >Tên người tạo dài hơn 7 ký tự</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label class="myLabel">Chọn ngày tạo</mat-label>
+          <input matInput [matDatepicker]="dp3" disabled />
+          <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+          <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+          <mat-error>Vui lòng chọn ngày tạo</mat-error>
+        </mat-form-field>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <div class="d-flex justify-content-end">
+    <button class="mr-2 myBtn submitBtn" mat-raised-button type="submit">
+      Thêm
+    </button>
+    <button class="myBtn" mat-raised-button color="warn" (click)="onClear()">
+      Xóa
+    </button>
+  </div>
+</form>

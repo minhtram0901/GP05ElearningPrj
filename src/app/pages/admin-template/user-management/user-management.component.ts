@@ -3,7 +3,7 @@ import { DataService } from 'src/app/_core/services/data.service';
 import { Subscription } from 'rxjs';
 import { Sort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
-import { AddUserComponent } from './add-user/add-user.component';
+import { UserFormComponent } from './user-form/user-form.component';
 
 export interface NguoiDung {
   stt: number;
@@ -100,7 +100,7 @@ export class UserManagementComponent implements OnInit {
   }
 
   onCreate(){
-    this.dialog.open(AddUserComponent);
+    this.dialog.open(UserFormComponent);
   }
 }
 

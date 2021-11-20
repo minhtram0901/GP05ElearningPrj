@@ -3,7 +3,7 @@ import { DataService } from 'src/app/_core/services/data.service';
 import { Subscription } from 'rxjs';
 import { Sort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
-import { AddCourseComponent } from './add-course/add-course.component';
+import { CourseFormComponent } from './course-form/course-form.component';
 
 export interface KhoaHoc {
   stt: number;
@@ -110,7 +110,7 @@ export class CourseManagementComponent implements OnInit {
   }
 
   onCreate() {
-    this.dialog.open(AddCourseComponent);
+    this.dialog.open(CourseFormComponent);
   }
 }
 
