@@ -24,7 +24,7 @@ table {
   table-layout: fixed;
   word-wrap: break-word;
   display: block;
-  height: 250px;
+  height: 280px;
   overflow-y: auto;
 }
 .table-btn {
@@ -53,4 +53,8 @@ table {
 
 .material-icons {
   vertical-align: -4px !important; /*Change this to adjust the icon*/
+}
+
+.deleteBtn{
+  color: rgba(255, 0, 0, 0.8);
 }

@@ -8,7 +8,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 export class HeaderAdminComponent implements OnInit {
   username: string = '';
   @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter();
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     if (localStorage.getItem('useradmin')) {

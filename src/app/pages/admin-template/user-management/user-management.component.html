@@ -3,10 +3,11 @@
   <div class="page__content shadow p-3">
     <div class="page__content-data text-center">
       <h3>Danh sách người dùng</h3>
-      <div class="d-flex align-items-center" style="width:90%">
-        <!-- <button mat-button>Basic</button> -->
-        <button mat-stroked-button class="addUserBtn" (click)=onCreate()><mat-icon>person_add</mat-icon>Thêm người dùng</button>
-        <nav class="navbar" style="width: 60%;">
+      <div class="d-flex align-items-center" style="width: 90%">
+        <button mat-stroked-button class="addUserBtn" (click)="onCreate()">
+          <mat-icon>person_add</mat-icon>Thêm người dùng
+        </button>
+        <nav class="navbar" style="width: 60%">
           <input
             class="form-control"
             type="text"
@@ -42,19 +43,19 @@
                 let stt = index
               "
             >
-              <td>{{ user.stt + 1 }}</td>
-              <td>{{ user.taiKhoan }}</td>
-              <td>{{ user.hoTen }}</td>
-              <td>{{ user.email }}</td>
-              <td>{{ user.soDt }}</td>
-              <td>
+              <td >{{ user.stt + 1 }}</td>
+              <td >{{ user.taiKhoan }}</td>
+              <td >{{ user.hoTen }}</td>
+              <td >{{ user.email }}</td>
+              <td >{{ user.soDt }}</td>
+              <td >
                 {{ user.maLoaiNguoiDung === "GV" ? "Giáo vụ" : "Học viên" }}
               </td>
-              <td>
-                <button mat-stroked-button class="table-btn mr-1">
+              <td  >
+                <button mat-stroked-button class="table-btn mr-1" (click)="onEdit(user)">
                   <mat-icon>create</mat-icon></button
-                ><button mat-stroked-button class="table-btn">
-                  <mat-icon>delete</mat-icon>
+                ><button mat-stroked-button class="table-btn deleteBtn">
+                  <mat-icon>delete_outline</mat-icon>
                 </button>
               </td>
             </tr>

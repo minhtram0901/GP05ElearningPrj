@@ -6,13 +6,13 @@ import { FormGroupDirective } from '@angular/forms';
 @Component({
   selector: 'app-course-form',
   templateUrl: './course-form.component.html',
-  styleUrls: ['./course-form.component.scss']
+  styleUrls: ['./course-form.component.scss'],
 })
 export class CourseFormComponent implements OnInit {
   danhMucDaChon: any;
   listDanhMuc: any;
   subDanhMucKhoaHoc = new Subscription();
-  constructor(private data: DataService, public courseService: CourseService) { }
+  constructor(private data: DataService, public courseService: CourseService) {}
 
   ngOnInit(): void {
     this.getDanhMucKhoaHoc();
@@ -23,13 +23,14 @@ export class CourseFormComponent implements OnInit {
       .get('QuanLyKhoaHoc/LayDanhMucKhoaHoc')
       .subscribe((result: any) => {
         this.listDanhMuc = result;
-        console.log(result);
       });
   }
+
+  ngOnDestroy() {
+    this.subDanhMucKhoaHoc.unsubscribe();
+  }
+
   onClear() {
     this.courseService.courseForm.reset();
-    // for (let control in this.courseService.courseForm.controls) {
-    //   this.courseService.courseForm.controls[control].setErrors(null);
-    // }
   }
 }

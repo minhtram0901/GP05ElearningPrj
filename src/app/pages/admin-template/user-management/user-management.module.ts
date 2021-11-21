@@ -9,9 +9,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { UserFormComponent } from './user-form/user-form.component';
 import { UserService } from '../_services/user.service';
+import { NotificationService } from 'src/app/_core/shares/notification.service';
 
 @NgModule({
-  declarations: [UserManagementComponent, UserFormComponent, UserFormComponent],
+  declarations: [UserManagementComponent, UserFormComponent],
   imports: [
     CommonModule,
     UserManagementRoutingModule,
@@ -23,7 +24,8 @@ import { UserService } from '../_services/user.service';
     Ng2SearchPipeModule,
   ],
   providers: [
-    UserService
+    UserService,
+    NotificationService
   ],
   entryComponents: [UserFormComponent],
 })

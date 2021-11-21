@@ -34,15 +34,15 @@ export class DataService {
     );
   }
 
-  // loginAdmin(user: any): Observable<any> {
-  //   const url = `https://elearning0706.cybersoft.edu.vn/api/QuanLyNguoiDung/DangNhap`;
-  //   return this.http.post(url, user).pipe(
-  //     tap(() => {}),
-  //     catchError((error: any) => {
-  //       return this.handleError(error);
-  //     })
-  //   );
-  // }
+  put(uri: any, data: any): Observable<any> {
+    const url = `${urlApi}/${uri}`;
+    return this.http.put(url, data).pipe(
+      tap(() => {}),
+      catchError((error: any) => {
+        return this.handleError(error);
+      })
+    );
+  }
 
   handleError(error: any) {
     switch (error.status) {
@@ -53,6 +53,7 @@ export class DataService {
         break;
 
       case 500:
+        // alert(error.error);
         break;
 
       default:

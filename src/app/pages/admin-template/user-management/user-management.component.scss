@@ -20,6 +20,13 @@
 .page__content-data {
   width: 100%;
 }
+table {
+  table-layout: fixed;
+  word-wrap: break-word;
+  display: block;
+  height: 280px;
+  overflow-y: auto;
+}
 
 .table-btn {
   min-width: 35px !important;
@@ -36,15 +43,19 @@
   margin-bottom: 15px;
 }
 
-.addUserBtn{
+.addUserBtn {
   // border: 1px solid #1e293b;
   box-shadow: 2px 2px 5px #1e293b;
 }
 
-.addUserBtn:focus{
+.addUserBtn:focus {
   outline: none;
 }
 
 .material-icons {
   vertical-align: -4px !important; /*Change this to adjust the icon*/
+}
+
+.deleteBtn {
+  color: rgba(255, 0, 0, 0.8);
 }

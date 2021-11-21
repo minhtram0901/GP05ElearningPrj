@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/_core/services/data.service';
 import { Subscription } from 'rxjs';
 import { Sort } from '@angular/material/sort';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UserFormComponent } from './user-form/user-form.component';
+import { UserService } from '../_services/user.service';
+import { NotificationService } from 'src/app/_core/shares/notification.service';
 
 export interface NguoiDung {
   stt: number;
@@ -24,15 +26,24 @@ export class UserManagementComponent implements OnInit {
   sortedData: NguoiDung[] = [];
   listUser: any;
   subListUser = new Subscription();
+  subTimKiemNguoiDung = new Subscription();
+  listTimKiemNguoiDung: any;
   tenNguoiDung: any;
   p: number = 1;
-  constructor(private data: DataService, private dialog: MatDialog) {
+  constructor(
+    private data: DataService,
+    private dialog: MatDialog,
+    private notificationService: NotificationService,
+    // private changeDetectorRefs: ChangeDetectorRef,
+    private service: UserService
+  ) {
     this.sortedData = this.danhSachNguoiDung.slice();
   }
 
   ngOnInit(): void {
     this.getUsers();
   }
+
   getUsers() {
     this.subListUser = this.data
       .get('QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=GP01')
@@ -54,6 +65,7 @@ export class UserManagementComponent implements OnInit {
 
   ngOnDestroy() {
     this.subListUser.unsubscribe();
+    this.subTimKiemNguoiDung.unsubscribe();
   }
 
   Search() {
@@ -99,9 +111,45 @@ export class UserManagementComponent implements OnInit {
     });
   }
 
-  onCreate(){
-    this.dialog.open(UserFormComponent);
+  onCreate() {
+    this.service.initializeFormGroup();
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    this.dialog.open(UserFormComponent, dialogConfig);
   }
+
+  onEdit(user: any) {
+    let findUser: any;
+    let keyword = getKeywordSearch(user.hoTen);
+    this.subTimKiemNguoiDung = this.data
+      .get(`QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=GP01&tuKhoa=${keyword}`)
+      .subscribe(
+        (result: any) => {
+          this.listTimKiemNguoiDung = result;
+          findUser = this.listTimKiemNguoiDung.find((item: any) => {
+            return item.taiKhoan === user.taiKhoan;
+          });
+          
+          this.service.populateForm(user, findUser.matKhau);
+          const dialogConfig = new MatDialogConfig();
+          dialogConfig.disableClose = true;
+          dialogConfig.autoFocus = true;
+          this.dialog.open(UserFormComponent, dialogConfig);
+          
+        },
+        (error) => {
+          this.notificationService.warn(error.error);
+        }
+      );
+  }
+}
+
+function getKeywordSearch(hoTen: string) {
+  let keyword = removeVietnameseTones(hoTen);
+  const keywordArr = keyword.split(' ');
+  keyword = keywordArr[0];
+  return keyword;
 }
 
 function removeVietnameseTones(str: string) {
