@@ -1,6 +1,17 @@
 <mat-toolbar class="formToolbar d-flex justify-content-between">
-  <span>{{userService.userForm.controls['$key'].value==='edit'?"Chỉnh sửa thông tin người dùng":"Thêm mới người dùng"}}</span>
-  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+  <span>{{
+    userService.userForm.controls["$key"].value === "edit"
+      ? "Chỉnh sửa thông tin người dùng"
+      : "Thêm mới người dùng"
+  }}</span>
+  <button
+    class="btn-dialog-close"
+    mat-stroked-button
+    (click)="onClose()"
+    tabIndex="-1"
+  >
+    <mat-icon>clear</mat-icon>
+  </button>
 </mat-toolbar>
 <form
   #userForm="ngForm"

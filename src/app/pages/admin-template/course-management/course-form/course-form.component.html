@@ -1,9 +1,25 @@
-<!-- <mat-toolbar>
-  <span>Title</span>
+<mat-toolbar class="formToolbar d-flex justify-content-between">
+  <span>{{
+    courseService.courseForm.controls["$key"].value === "edit"
+      ? "Chỉnh sửa thông tin khóa học"
+      : "Thêm mới khóa học"
+  }}</span>
   <span class="fill-remaining-space"></span>
-  <button class="btn-dialog-close" mat-stroked-button tabIndex="-1"><mat-icon>clear</mat-icon></button>
-</mat-toolbar> -->
-<form [formGroup]="courseService.courseForm" class="normal-form">
+  <button
+    class="btn-dialog-close"
+    mat-stroked-button
+    tabIndex="-1"
+    (click)="onClose()"
+  >
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+<form
+  #courseForm="ngForm"
+  [formGroup]="courseService.courseForm"
+  class="normal-form"
+  (submit)="onSubmit()"
+>
   <mat-grid-list cols="2" rowHeight="400px">
     <mat-grid-tile>
       <div class="controles-container">
@@ -82,6 +98,12 @@
           <mat-label class="myLabel">Lượt xem</mat-label>
           <input formControlName="luotXem" matInput type="number" min="0" />
           <mat-error
+            *ngIf="
+              courseService.courseForm.controls['luotXem'].errors?.required
+            "
+            >Vui lòng nhập lượt xem</mat-error
+          >
+          <mat-error
             *ngIf="courseService.courseForm.controls['luotXem'].errors?.min"
             >Lượt xem phải lớn hơn hoặc bằng 0</mat-error
           >
@@ -99,6 +121,12 @@
             min="0"
             max="5"
           />
+          <mat-error
+            *ngIf="
+              courseService.courseForm.controls['danhGia'].errors?.required
+            "
+            >Vui lòng nhập đánh giá</mat-error
+          >
           <mat-error
             *ngIf="courseService.courseForm.controls['danhGia'].errors?.min"
             >Đánh giá phải từ 0 đến 5</mat-error
@@ -139,7 +167,12 @@
     </mat-grid-tile>
   </mat-grid-list>
   <div class="d-flex justify-content-end">
-    <button class="mr-2 myBtn submitBtn" mat-raised-button type="submit">
+    <button
+      class="mr-2 myBtn submitBtn"
+      mat-raised-button
+      type="submit"
+      [disabled]="courseService.courseForm.invalid"
+    >
       Thêm
     </button>
     <button class="myBtn" mat-raised-button color="warn" (click)="onClear()">

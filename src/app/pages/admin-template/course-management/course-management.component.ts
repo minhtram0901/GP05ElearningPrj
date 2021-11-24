@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/_core/services/data.service';
 import { Subscription } from 'rxjs';
 import { Sort } from '@angular/material/sort';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CourseFormComponent } from './course-form/course-form.component';
+import { NotificationService } from 'src/app/_core/shares/notification.service';
+import { CourseService } from '../_services/course.service';
 
 export interface KhoaHoc {
   stt: number;
@@ -16,6 +18,7 @@ export interface KhoaHoc {
   moTa: string;
   luotXem: number;
   hinhAnh: number;
+  maDanhMucKhoaHoc: string;
 }
 
 @Component({
@@ -30,7 +33,12 @@ export class CourseManagementComponent implements OnInit {
   subListCourse = new Subscription();
   tenKhoaHoc: any;
   p: number = 1;
-  constructor(private data: DataService, private dialog: MatDialog) {
+  constructor(
+    private data: DataService,
+    private dialog: MatDialog,
+    private notificationService: NotificationService,
+    private service: CourseService
+  ) {
     this.sortedData = this.danhSachKhoaHoc.slice();
   }
 
@@ -41,8 +49,11 @@ export class CourseManagementComponent implements OnInit {
     this.subListCourse = this.data
       .get('QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=GP01')
       .subscribe((result: any) => {
+
         this.listCourse = result;
+        console.log("listCourse", this.listCourse);
         this.danhSachKhoaHoc = this.listCourse.map((item: any, index: any) => {
+          console.log(item.danhMucKhoaHoc.maDanhMucKhoahoc);
           return {
             stt: index,
             danhMucKhoaHoc: item.danhMucKhoaHoc.tenDanhMucKhoaHoc,
@@ -54,6 +65,7 @@ export class CourseManagementComponent implements OnInit {
             moTa: item.moTa,
             luotXem: item.luotXem,
             hinhAnh: item.hinhAnh,
+            maDanhMucKhoaHoc: item.danhMucKhoaHoc.maDanhMucKhoahoc,
           };
         });
         this.sortedData = this.danhSachKhoaHoc;
@@ -110,7 +122,19 @@ export class CourseManagementComponent implements OnInit {
   }
 
   onCreate() {
-    this.dialog.open(CourseFormComponent);
+    this.service.initializeFormGroup();
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    this.dialog.open(CourseFormComponent, dialogConfig);
+  }
+
+  onEdit(course: any) {
+    this.service.populateForm(course);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    this.dialog.open(CourseFormComponent, dialogConfig);
   }
 }
 

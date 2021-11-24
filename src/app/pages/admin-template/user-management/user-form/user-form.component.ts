@@ -1,12 +1,8 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { DataService } from 'src/app/_core/services/data.service';
 import { NotificationService } from 'src/app/_core/shares/notification.service';
 import { UserService } from '../../_services/user.service';
-import {
-  MatDialog,
-  MatDialogConfig,
-  MatDialogRef,
-} from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-user-form',
@@ -22,7 +18,6 @@ export class UserFormComponent implements OnInit {
     public userService: UserService,
     private notificationService: NotificationService,
     private data: DataService,
-    private changeDetectorRefs: ChangeDetectorRef,
     public dialogRef: MatDialogRef<UserFormComponent>
   ) {}
 
@@ -51,6 +46,7 @@ export class UserFormComponent implements OnInit {
   }
 
   addUser(user: any) {
+    console.log("user", user);
     user.maNhom = 'GP01';
     this.data.post(`QuanLyNguoiDung/ThemNguoiDung`, user).subscribe(
       () => {
@@ -58,7 +54,6 @@ export class UserFormComponent implements OnInit {
         this.userService.initializeFormGroup();
         this.notificationService.success('Thêm người dùng thành công');
         this.onClose();
-        this.changeDetectorRefs.detectChanges();
       },
       (error) => {
         this.notificationService.warn(error.error);
@@ -81,8 +76,4 @@ export class UserFormComponent implements OnInit {
     );
   }
 
-  @HostListener('window: beforeunload', ['$event'])
-  canDeactivateRegister(){
-    return !this.userForm.dirty;
-  }
 }
