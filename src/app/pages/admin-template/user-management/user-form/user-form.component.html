@@ -3,6 +3,7 @@
   <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
 </mat-toolbar>
 <form
+  #userForm="ngForm"
   [formGroup]="userService.userForm"
   class="normal-form"
   (submit)="onSubmit()"

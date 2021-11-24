@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { DataService } from 'src/app/_core/services/data.service';
 import { NotificationService } from 'src/app/_core/shares/notification.service';
 import { UserService } from '../../_services/user.service';
@@ -14,6 +14,8 @@ import {
   styleUrls: ['./user-form.component.scss'],
 })
 export class UserFormComponent implements OnInit {
+  @ViewChild('userForm') userForm: any;
+
   isAddUserSuccess: boolean = false;
   addUserError: string = '';
   constructor(
@@ -45,6 +47,7 @@ export class UserFormComponent implements OnInit {
     this.userService.userForm.reset();
     this.userService.initializeFormGroup();
     this.dialogRef.close();
+    this.userService.filter('Close form');
   }
 
   addUser(user: any) {
@@ -76,5 +79,10 @@ export class UserFormComponent implements OnInit {
         this.notificationService.warn(error.error);
       }
     );
+  }
+
+  @HostListener('window: beforeunload', ['$event'])
+  canDeactivateRegister(){
+    return !this.userForm.dirty;
   }
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {  Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/_core/services/data.service';
 import { Subscription } from 'rxjs';
 import { Sort } from '@angular/material/sort';
@@ -34,10 +34,12 @@ export class UserManagementComponent implements OnInit {
     private data: DataService,
     private dialog: MatDialog,
     private notificationService: NotificationService,
-    // private changeDetectorRefs: ChangeDetectorRef,
     private service: UserService
   ) {
     this.sortedData = this.danhSachNguoiDung.slice();
+    this.service.listen().subscribe(()=>{
+      this.getUsers();
+    })
   }
 
   ngOnInit(): void {
