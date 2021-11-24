@@ -46,7 +46,6 @@ export class UserFormComponent implements OnInit {
   }
 
   addUser(user: any) {
-    console.log("user", user);
     user.maNhom = 'GP01';
     this.data.post(`QuanLyNguoiDung/ThemNguoiDung`, user).subscribe(
       () => {

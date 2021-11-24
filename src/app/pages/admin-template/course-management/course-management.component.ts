@@ -51,9 +51,7 @@ export class CourseManagementComponent implements OnInit {
       .subscribe((result: any) => {
 
         this.listCourse = result;
-        console.log("listCourse", this.listCourse);
         this.danhSachKhoaHoc = this.listCourse.map((item: any, index: any) => {
-          console.log(item.danhMucKhoaHoc.maDanhMucKhoahoc);
           return {
             stt: index,
             danhMucKhoaHoc: item.danhMucKhoaHoc.tenDanhMucKhoaHoc,

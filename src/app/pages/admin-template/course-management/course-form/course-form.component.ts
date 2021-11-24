@@ -30,7 +30,6 @@ export class CourseFormComponent implements OnInit {
       .get('QuanLyKhoaHoc/LayDanhMucKhoaHoc')
       .subscribe((result: any) => {
         this.listDanhMuc = result;
-        // this.danhMucDaChon = this.listDanhMuc[0].maDanhMuc;
       });
   }
 
@@ -51,16 +50,29 @@ export class CourseFormComponent implements OnInit {
 
   onSubmit() {
     if (this.courseService.courseForm.valid) {
-      if (this.courseService.courseForm.get('$key')?.value === null)
-        this.addCourse(this.courseService.courseForm.value);
-      else {
-        this.editCourse(this.courseService.courseForm.value);
+      let obj = {
+        maKhoaHoc: this.courseService.courseForm.value.maKhoaHoc,
+        biDanh: this.courseService.courseForm.value.biDanh,
+        tenKhoaHoc: this.courseService.courseForm.value.tenKhoaHoc,
+        moTa: this.courseService.courseForm.value.moTa,
+        luotXem: this.courseService.courseForm.value.luotXem,
+        danhGia: this.courseService.courseForm.value.danhGia,
+        hinhAnh: this.courseService.courseForm.value.hinhAnh,
+        maNhom: 'GP01',
+        ngayTao: this.courseService.courseForm.value.ngayTao,
+        maDanhMucKhoaHoc: this.courseService.courseForm.value.maDanhMucKhoaHoc,
+        taiKhoanNguoiTao: this.courseService.courseForm.value.nguoiTao,
+      };
+      console.log(obj);
+      if (this.courseService.courseForm.get('$key')?.value === null) {
+        this.addCourse(obj);
+      } else {
+        this.editCourse(obj);
       }
     }
   }
 
   addCourse(course: any) {
-    console.log('course', course);
     course.maNhom = 'GP01';
     this.data.post(`QuanLyKhoaHoc/ThemKhoaHoc`, course).subscribe(
       () => {
@@ -71,7 +83,6 @@ export class CourseFormComponent implements OnInit {
       },
       (error) => {
         this.notificationService.warn(error.error);
-        console.log(error, error.error);
       }
     );
   }

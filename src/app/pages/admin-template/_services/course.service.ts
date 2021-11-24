@@ -37,7 +37,7 @@ export class CourseService {
   initializeFormGroup() {
     this.courseForm.setValue({
       $key: null,
-      maKhoaHoc: '',
+      maKhoaHoc: 'aaaaaa',
       biDanh: '',
       tenKhoaHoc: '',
       moTa: '',
@@ -46,13 +46,12 @@ export class CourseService {
       hinhAnh: '',
       maNhom: 'GP01',
       ngayTao: '',
-      maDanhMucKhoaHoc: '',
+      maDanhMucKhoaHoc: 'BackEnd',
       nguoiTao: '',
     });
   }
 
   populateForm(course: any) {
-    console.log("populate", course);
     this.courseForm.setValue({
       $key: 'edit',
       maKhoaHoc: course.maKhoaHoc ? course.maKhoaHoc : '',
