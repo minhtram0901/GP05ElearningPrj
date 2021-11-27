@@ -11,16 +11,48 @@ import Swal from 'sweetalert2';
 })
 export class CardCourseComponent implements OnInit {
   @Input() course: any;
+  notRegisterCourse: boolean = false;
   isRegister: boolean = true;
+
+
   constructor(private dataService: DataService, private router: Router, private shareService: ShareService) { }
 
   ngOnInit(): void {
+
+    this.shareService.user.subscribe((result: any) => {
+      if (result) {
+
+        this.dataService.post("QuanLyNguoiDung/ThongTinNguoiDung", null).subscribe((result: any) => {
+          if (result) {
+            let count = 0;
+
+            for (let i = 0; i < result.chiTietKhoaHocGhiDanh.length; i++) {
+              if (result.chiTietKhoaHocGhiDanh[i].maKhoaHoc == this.course.maKhoaHoc) {
+                count++;
+              }
+            }
+            if (count) {
+              this.notRegisterCourse = true;
+            } else {
+              this.notRegisterCourse = false;
+            }
+          }
+        });
+      } else {
+        this.notRegisterCourse = false;
+      }
+    });
+
     if (Object.keys(this.course).length === 2) {
       this.isRegister = false;
       this.dataService.get(`QuanLyKhoaHoc/LayThongTinKhoaHoc?maKhoaHoc=${this.course?.maKhoaHoc}`).subscribe((result) => {
         this.course = result;
       });
     }
+  }
+
+  goDetail() {
+    this.router.navigate([`/detail/${this.course.maKhoaHoc}`],);
   }
 
   onRegister() {
@@ -49,6 +81,14 @@ export class CardCourseComponent implements OnInit {
           }
         });
     }
+    else {
+      Swal.fire({
+        title: 'Vui lòng đăng nhập!',
+        icon: 'info',
+        confirmButtonText: 'OK'
+      });
+    }
+
   }
   onCancelRegister() {
     Swal.fire({
@@ -80,4 +120,8 @@ export class CardCourseComponent implements OnInit {
       }
     });
   }
+  onReview() {
+    this.shareService.courseReview = this.course;
+  }
 }
+

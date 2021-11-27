@@ -10,6 +10,7 @@ import { DirectivesModule } from 'src/app/_core/shares/directives/directives.mod
 import { FormsModule } from '@angular/forms';
 import { ModalLoginComponent } from './navbar-home/modal-login/modal-login.component';
 import { ModalRegisterComponent } from './navbar-home/modal-register/modal-register.component';
+import { ModalReviewComponent } from './modal-review/modal-review.component';
 
 
 
@@ -20,6 +21,7 @@ import { ModalRegisterComponent } from './navbar-home/modal-register/modal-regis
     NavbarHomeComponent,
     ModalLoginComponent,
     ModalRegisterComponent,
+    ModalReviewComponent,
   ],
   imports: [
     CommonModule,
@@ -32,6 +34,7 @@ import { ModalRegisterComponent } from './navbar-home/modal-register/modal-regis
     CardCourseComponent,
     FooterHomeComponent,
     NavbarHomeComponent,
+    ModalReviewComponent,
 
 
   ]
