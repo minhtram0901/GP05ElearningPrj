@@ -65,6 +65,19 @@ export class UserManagementComponent implements OnInit {
       });
   }
 
+  deleteUser(taiKhoan: any) {
+    this.data.delete(`QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${taiKhoan}`).subscribe(
+      () => {
+        this.notificationService.success('Xóa người dùng thành công');
+        this.getUsers();
+      },
+      (error) => {
+        this.notificationService.warn(error.error);
+        this.getUsers();
+      }
+    );
+  }
+
   ngOnDestroy() {
     this.subListUser.unsubscribe();
     this.subTimKiemNguoiDung.unsubscribe();

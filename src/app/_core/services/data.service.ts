@@ -44,19 +44,33 @@ export class DataService {
     );
   }
 
+  delete(uri: any): Observable<any> {
+    const url = `${urlApi}/${uri}`;
+    return this.http.delete(url).pipe(
+      tap(() => {}),
+      catchError((error: any) => {
+        return this.handleError(error);
+      })
+    );
+  }
+
   handleError(error: any) {
+    console.log("handleError", error);
     switch (error.status) {
       case 300:
+        console.log('status 300');
         break;
 
       case 400:
+        console.log('status 400');
         break;
 
       case 500:
-        // alert(error.error);
+        console.log('status 500');
         break;
 
       default:
+        console.log('status other');
         break;
     }
     return throwError(error);

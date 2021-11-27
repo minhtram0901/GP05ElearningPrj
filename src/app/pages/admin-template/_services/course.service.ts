@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
-
+import * as _ from 'lodash';
 @Injectable({
   providedIn: 'root',
 })
@@ -37,7 +37,7 @@ export class CourseService {
   initializeFormGroup() {
     this.courseForm.setValue({
       $key: null,
-      maKhoaHoc: 'aaaaaa',
+      maKhoaHoc: '',
       biDanh: '',
       tenKhoaHoc: '',
       moTa: '',
@@ -45,8 +45,8 @@ export class CourseService {
       danhGia: '',
       hinhAnh: '',
       maNhom: 'GP01',
-      ngayTao: '',
-      maDanhMucKhoaHoc: 'BackEnd',
+      ngayTao: new Date(),
+      maDanhMucKhoaHoc: "BackEnd",
       nguoiTao: '',
     });
   }
@@ -62,11 +62,18 @@ export class CourseService {
       maNhom: 'GP01',
       danhGia: course.danhGia ? course.danhGia : '',
       hinhAnh: course.hinhAnh ? course.hinhAnh : '',
-      ngayTao: course.ngayTao ? course.ngayTao : '',
+      ngayTao:  course.ngayTao === "" ? "" : this.convertToDate(course.ngayTao),
       maDanhMucKhoaHoc: course.maDanhMucKhoaHoc ? course.maDanhMucKhoaHoc : '',
       nguoiTao: course.nguoiTao ? course.nguoiTao : '',
     });
   }
+
+  convertToDate(dateString: string) {
+    //  Convert a "dd/MM/yyyy" string into a Date object
+    let d = dateString.split("/");
+    let dat = new Date(d[2] + '/' + d[1] + '/' + d[0]);
+    return dat;     
+}
 
   private _listeners = new Subject<any>();
   listen(): Observable<any> {

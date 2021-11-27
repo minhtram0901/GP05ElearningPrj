@@ -12,7 +12,7 @@ export interface KhoaHoc {
   danhMucKhoaHoc: string;
   maKhoaHoc: string;
   tenKhoaHoc: string;
-  ngayTao: Date;
+  ngayTao: string;
   nguoiTao: string;
   biDanh: string;
   moTa: string;
@@ -40,6 +40,9 @@ export class CourseManagementComponent implements OnInit {
     private service: CourseService
   ) {
     this.sortedData = this.danhSachKhoaHoc.slice();
+    this.service.listen().subscribe(() => {
+      this.getCourse();
+    });
   }
 
   ngOnInit(): void {
@@ -49,7 +52,6 @@ export class CourseManagementComponent implements OnInit {
     this.subListCourse = this.data
       .get('QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=GP01')
       .subscribe((result: any) => {
-
         this.listCourse = result;
         this.danhSachKhoaHoc = this.listCourse.map((item: any, index: any) => {
           return {
@@ -133,6 +135,23 @@ export class CourseManagementComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     this.dialog.open(CourseFormComponent, dialogConfig);
+  }
+
+  deleteCourse(maKhoaHoc: any) {
+    this.data
+      .delete(`QuanLyKhoaHoc/XoaKhoaHoc?MaKhoaHoc=${maKhoaHoc}`)
+      .subscribe(
+        (result) => {
+          console.log('result', result);
+          this.notificationService.success('Xóa khóa học thành công');
+          this.getCourse();
+        },
+        (error) => {
+          console.log('error', error);
+          this.notificationService.warn(error.error);
+          this.getCourse();
+        }
+      );
   }
 }
 

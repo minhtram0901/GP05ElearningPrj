@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { DataService } from 'src/app/_core/services/data.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { NotificationService } from 'src/app/_core/shares/notification.service';
+import { DanhMucService } from '../../_services/danh-muc.service';
 
 @Component({
   selector: 'app-course-form',
@@ -11,6 +12,7 @@ import { NotificationService } from 'src/app/_core/shares/notification.service';
   styleUrls: ['./course-form.component.scss'],
 })
 export class CourseFormComponent implements OnInit {
+  disableMaKhoaHoc: boolean = false;
   danhMucDaChon: any;
   listDanhMuc: any;
   subDanhMucKhoaHoc = new Subscription();
@@ -18,19 +20,17 @@ export class CourseFormComponent implements OnInit {
     private data: DataService,
     public dialogRef: MatDialogRef<CourseFormComponent>,
     public courseService: CourseService,
-    private notificationService: NotificationService
-  ) {}
+    private notificationService: NotificationService,
+    public danhMuc: DanhMucService
+  ) {
+    if (this.courseService.courseForm.get('$key')?.value === null) {
+      this.disableMaKhoaHoc = false;
+    } else{
+      this.disableMaKhoaHoc = true;
+    }
+   }
 
   ngOnInit(): void {
-    this.getDanhMucKhoaHoc();
-  }
-
-  getDanhMucKhoaHoc() {
-    this.subDanhMucKhoaHoc = this.data
-      .get('QuanLyKhoaHoc/LayDanhMucKhoaHoc')
-      .subscribe((result: any) => {
-        this.listDanhMuc = result;
-      });
   }
 
   ngOnDestroy() {
@@ -63,7 +63,7 @@ export class CourseFormComponent implements OnInit {
         maDanhMucKhoaHoc: this.courseService.courseForm.value.maDanhMucKhoaHoc,
         taiKhoanNguoiTao: this.courseService.courseForm.value.nguoiTao,
       };
-      console.log(obj);
+      
       if (this.courseService.courseForm.get('$key')?.value === null) {
         this.addCourse(obj);
       } else {
@@ -101,4 +101,5 @@ export class CourseFormComponent implements OnInit {
       }
     );
   }
+  
 }

@@ -10,6 +10,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { CourseFormComponent } from './course-form/course-form.component';
 import { CourseService } from '../_services/course.service';
 import { NotificationService } from 'src/app/_core/shares/notification.service';
+import { DanhMucService } from '../_services/danh-muc.service';
 
 @NgModule({
   declarations: [CourseManagementComponent, CourseFormComponent],
@@ -23,7 +24,7 @@ import { NotificationService } from 'src/app/_core/shares/notification.service';
     NgxPaginationModule,
     Ng2SearchPipeModule,
   ],
-  providers: [CourseService, NotificationService],
+  providers: [CourseService, NotificationService, DanhMucService],
   entryComponents: [CourseFormComponent],
 })
 export class CourseManagementModule {}

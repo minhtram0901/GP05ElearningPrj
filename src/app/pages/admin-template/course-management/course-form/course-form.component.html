@@ -26,7 +26,8 @@
         <input type="hidden" formControlName="$key" />
         <mat-form-field>
           <mat-label class="myLabel">Mã khóa học *</mat-label>
-          <input formControlName="maKhoaHoc" matInput type="text" />
+          <input formControlName="maKhoaHoc" matInput type="text" 
+          [readonly]="disableMaKhoaHoc"/>
           <mat-error
             *ngIf="
               courseService.courseForm.controls['maKhoaHoc'].errors?.required
@@ -54,12 +55,11 @@
           <mat-label class="myLabel">Danh mục khóa học *</mat-label>
           <mat-select
             formControlName="maDanhMucKhoaHoc"
-            [(ngModel)]="danhMucDaChon"
             name="maDanhMucKhoaHoc"
             placeholder="Danh mục khóa học"
           >
             <mat-option
-              *ngFor="let item of listDanhMuc; let stt = index"
+              *ngFor="let item of danhMuc.listDanhMuc"
               [value]="item.maDanhMuc"
             >
               {{ item.tenDanhMuc }}
@@ -157,11 +157,11 @@
           >
         </mat-form-field>
         <mat-form-field>
-          <mat-label class="myLabel">Chọn ngày tạo</mat-label>
-          <input matInput [matDatepicker]="dp3" disabled />
-          <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
-          <mat-datepicker #dp3 disabled="false"></mat-datepicker>
-          <mat-error>Vui lòng chọn ngày tạo</mat-error>
+          <mat-label class="myLabel">Nhập ngày tạo *</mat-label>
+          <input formControlName="ngayTao" matInput [matDatepicker]="picker" type="text" />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error>Vui lòng nhập ngày hợp lệ</mat-error>
         </mat-form-field>
       </div>
     </mat-grid-tile>
@@ -171,9 +171,12 @@
       class="mr-2 myBtn submitBtn"
       mat-raised-button
       type="submit"
-      [disabled]="courseService.courseForm.invalid"
     >
-      Thêm
+    {{
+      courseService.courseForm.controls["$key"].value === "edit"
+        ? "Lưu"
+        : "Thêm"
+    }}
     </button>
     <button class="myBtn" mat-raised-button color="warn" (click)="onClear()">
       Xóa

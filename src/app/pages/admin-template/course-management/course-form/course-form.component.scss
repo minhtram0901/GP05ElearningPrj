@@ -151,3 +151,7 @@ mat-datepicker-toggle {
   height: 40px;
   padding: 0px !important;
 }
+
+input:read-only {
+  background-color: rgb(112, 111, 111);
+}
