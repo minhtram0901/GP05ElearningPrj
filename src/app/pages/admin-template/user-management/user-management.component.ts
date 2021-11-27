@@ -1,4 +1,4 @@
-import {  Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/_core/services/data.service';
 import { Subscription } from 'rxjs';
 import { Sort } from '@angular/material/sort';
@@ -37,7 +37,7 @@ export class UserManagementComponent implements OnInit {
     private service: UserService
   ) {
     this.sortedData = this.danhSachNguoiDung.slice();
-    this.service.listen().subscribe(()=>{
+    this.service.listen().subscribe(() => {
       this.getUsers();
     })
   }
@@ -66,16 +66,20 @@ export class UserManagementComponent implements OnInit {
   }
 
   deleteUser(taiKhoan: any) {
-    this.data.delete(`QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${taiKhoan}`).subscribe(
-      () => {
-        this.notificationService.success('Xóa người dùng thành công');
-        this.getUsers();
-      },
-      (error) => {
-        this.notificationService.warn(error.error);
-        this.getUsers();
-      }
-    );
+    this.data
+      .delete(`QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${taiKhoan}`,{
+        responseType: 'text'
+      })
+      .subscribe(
+        () => {
+          this.notificationService.success('Xóa người dùng thành công');
+          this.getUsers();
+        },
+        (error) => {
+          this.notificationService.warn(error.error);
+          this.getUsers();
+        }
+      );
   }
 
   ngOnDestroy() {
@@ -145,13 +149,13 @@ export class UserManagementComponent implements OnInit {
           findUser = this.listTimKiemNguoiDung.find((item: any) => {
             return item.taiKhoan === user.taiKhoan;
           });
-          
+
           this.service.populateForm(user, findUser.matKhau);
           const dialogConfig = new MatDialogConfig();
           dialogConfig.disableClose = true;
           dialogConfig.autoFocus = true;
           this.dialog.open(UserFormComponent, dialogConfig);
-          
+
         },
         (error) => {
           this.notificationService.warn(error.error);

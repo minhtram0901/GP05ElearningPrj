@@ -139,7 +139,9 @@ export class CourseManagementComponent implements OnInit {
 
   deleteCourse(maKhoaHoc: any) {
     this.data
-      .delete(`QuanLyKhoaHoc/XoaKhoaHoc?MaKhoaHoc=${maKhoaHoc}`)
+      .delete(`QuanLyKhoaHoc/XoaKhoaHoc?MaKhoaHoc=${maKhoaHoc}`, {
+        responseType: 'text'
+      })
       .subscribe(
         (result) => {
           console.log('result', result);
