@@ -1,12 +1,8 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { DataService } from 'src/app/_core/services/data.service';
 import { NotificationService } from 'src/app/_core/shares/notification.service';
 import { UserService } from '../../_services/user.service';
-import {
-  MatDialog,
-  MatDialogConfig,
-  MatDialogRef,
-} from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-user-form',
@@ -14,13 +10,14 @@ import {
   styleUrls: ['./user-form.component.scss'],
 })
 export class UserFormComponent implements OnInit {
+  @ViewChild('userForm') userForm: any;
+
   isAddUserSuccess: boolean = false;
   addUserError: string = '';
   constructor(
     public userService: UserService,
     private notificationService: NotificationService,
     private data: DataService,
-    private changeDetectorRefs: ChangeDetectorRef,
     public dialogRef: MatDialogRef<UserFormComponent>
   ) {}
 
@@ -45,6 +42,7 @@ export class UserFormComponent implements OnInit {
     this.userService.userForm.reset();
     this.userService.initializeFormGroup();
     this.dialogRef.close();
+    this.userService.filter('Close form');
   }
 
   addUser(user: any) {
@@ -55,7 +53,6 @@ export class UserFormComponent implements OnInit {
         this.userService.initializeFormGroup();
         this.notificationService.success('Thêm người dùng thành công');
         this.onClose();
-        this.changeDetectorRefs.detectChanges();
       },
       (error) => {
         this.notificationService.warn(error.error);

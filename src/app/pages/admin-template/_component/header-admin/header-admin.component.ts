@@ -1,4 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header-admin',
@@ -8,7 +9,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 export class HeaderAdminComponent implements OnInit {
   username: string = '';
   @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter();
-  constructor() {}
+  constructor( private router: Router) {}
 
   ngOnInit(): void {
     if (localStorage.getItem('useradmin')) {
@@ -18,5 +19,10 @@ export class HeaderAdminComponent implements OnInit {
   }
   toggleSidebar() {
     this.toggleSidebarForMe.emit();
+  }
+
+  logout(){
+    localStorage.removeItem('useradmin');
+    this.router.navigate(['/auth']);
   }
 }

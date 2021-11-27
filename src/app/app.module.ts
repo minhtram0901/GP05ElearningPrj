@@ -19,4 +19,4 @@ import { AuthInterceptor } from './_core/guards/jwt.interceptor';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

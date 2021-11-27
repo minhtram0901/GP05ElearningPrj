@@ -2,20 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/_core/services/data.service';
 import { Subscription } from 'rxjs';
 import { Sort } from '@angular/material/sort';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CourseFormComponent } from './course-form/course-form.component';
+import { NotificationService } from 'src/app/_core/shares/notification.service';
+import { CourseService } from '../_services/course.service';
 
 export interface KhoaHoc {
   stt: number;
   danhMucKhoaHoc: string;
   maKhoaHoc: string;
   tenKhoaHoc: string;
-  ngayTao: Date;
+  ngayTao: string;
   nguoiTao: string;
   biDanh: string;
   moTa: string;
   luotXem: number;
   hinhAnh: number;
+  maDanhMucKhoaHoc: string;
 }
 
 @Component({
@@ -30,8 +33,16 @@ export class CourseManagementComponent implements OnInit {
   subListCourse = new Subscription();
   tenKhoaHoc: any;
   p: number = 1;
-  constructor(private data: DataService, private dialog: MatDialog) {
+  constructor(
+    private data: DataService,
+    private dialog: MatDialog,
+    private notificationService: NotificationService,
+    private service: CourseService
+  ) {
     this.sortedData = this.danhSachKhoaHoc.slice();
+    this.service.listen().subscribe(() => {
+      this.getCourse();
+    });
   }
 
   ngOnInit(): void {
@@ -54,6 +65,7 @@ export class CourseManagementComponent implements OnInit {
             moTa: item.moTa,
             luotXem: item.luotXem,
             hinhAnh: item.hinhAnh,
+            maDanhMucKhoaHoc: item.danhMucKhoaHoc.maDanhMucKhoahoc,
           };
         });
         this.sortedData = this.danhSachKhoaHoc;
@@ -110,7 +122,36 @@ export class CourseManagementComponent implements OnInit {
   }
 
   onCreate() {
-    this.dialog.open(CourseFormComponent);
+    this.service.initializeFormGroup();
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    this.dialog.open(CourseFormComponent, dialogConfig);
+  }
+
+  onEdit(course: any) {
+    this.service.populateForm(course);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    this.dialog.open(CourseFormComponent, dialogConfig);
+  }
+
+  deleteCourse(maKhoaHoc: any) {
+    this.data
+      .delete(`QuanLyKhoaHoc/XoaKhoaHoc?MaKhoaHoc=${maKhoaHoc}`)
+      .subscribe(
+        (result) => {
+          console.log('result', result);
+          this.notificationService.success('Xóa khóa học thành công');
+          this.getCourse();
+        },
+        (error) => {
+          console.log('error', error);
+          this.notificationService.warn(error.error);
+          this.getCourse();
+        }
+      );
   }
 }
 

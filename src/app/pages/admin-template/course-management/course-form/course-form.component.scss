@@ -113,21 +113,45 @@ input::-webkit-input-placeholder {
 
 mat-datepicker-toggle {
   color: black !important;
- }
+}
 
- .myBtn{
-   outline: none !important;
- }
+.myBtn {
+  outline: none !important;
+}
 
- .mat-raised-button.submitBtn{
-  background-color:rgb(74, 85, 240);
-} 
+.mat-raised-button.submitBtn {
+  background-color: rgb(74, 85, 240);
+}
 
 /* to change arrow when focused */
 ::ng-deep.mat-form-field .mat-select.mat-select-invalid .mat-select-arrow {
   color: black !important;
 }
 
-::ng-deep.mat-form-field.mat-focused.mat-primary .mat-select-arrow{
+::ng-deep.mat-form-field.mat-focused.mat-primary .mat-select-arrow {
   color: black !important;
+}
+
+.mat-raised-button.submitBtn {
+  background-color: rgb(74, 85, 240);
+}
+
+.formToolbar {
+  border: solid 1px #cccccc;
+  box-shadow: 2px 2px 2px #cccccc;
+  background-color: transparent;
+  border-radius: 5px;
+  color: black;
+  font-size: 16px;
+}
+
+.btn-dialog-close {
+  width: 45px;
+  min-width: 0px !important;
+  height: 40px;
+  padding: 0px !important;
+}
+
+input:read-only {
+  background-color: rgb(112, 111, 111);
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {  Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/_core/services/data.service';
 import { Subscription } from 'rxjs';
 import { Sort } from '@angular/material/sort';
@@ -34,10 +34,12 @@ export class UserManagementComponent implements OnInit {
     private data: DataService,
     private dialog: MatDialog,
     private notificationService: NotificationService,
-    // private changeDetectorRefs: ChangeDetectorRef,
     private service: UserService
   ) {
     this.sortedData = this.danhSachNguoiDung.slice();
+    this.service.listen().subscribe(()=>{
+      this.getUsers();
+    })
   }
 
   ngOnInit(): void {
@@ -61,6 +63,19 @@ export class UserManagementComponent implements OnInit {
         });
         this.sortedData = this.danhSachNguoiDung;
       });
+  }
+
+  deleteUser(taiKhoan: any) {
+    this.data.delete(`QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${taiKhoan}`).subscribe(
+      () => {
+        this.notificationService.success('Xóa người dùng thành công');
+        this.getUsers();
+      },
+      (error) => {
+        this.notificationService.warn(error.error);
+        this.getUsers();
+      }
+    );
   }
 
   ngOnDestroy() {

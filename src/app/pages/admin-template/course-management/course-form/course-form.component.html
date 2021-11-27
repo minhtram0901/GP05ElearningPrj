@@ -1,16 +1,33 @@
-<!-- <mat-toolbar>
-  <span>Title</span>
+<mat-toolbar class="formToolbar d-flex justify-content-between">
+  <span>{{
+    courseService.courseForm.controls["$key"].value === "edit"
+      ? "Chỉnh sửa thông tin khóa học"
+      : "Thêm mới khóa học"
+  }}</span>
   <span class="fill-remaining-space"></span>
-  <button class="btn-dialog-close" mat-stroked-button tabIndex="-1"><mat-icon>clear</mat-icon></button>
-</mat-toolbar> -->
-<form [formGroup]="courseService.courseForm" class="normal-form">
+  <button
+    class="btn-dialog-close"
+    mat-stroked-button
+    tabIndex="-1"
+    (click)="onClose()"
+  >
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+<form
+  #courseForm="ngForm"
+  [formGroup]="courseService.courseForm"
+  class="normal-form"
+  (submit)="onSubmit()"
+>
   <mat-grid-list cols="2" rowHeight="400px">
     <mat-grid-tile>
       <div class="controles-container">
         <input type="hidden" formControlName="$key" />
         <mat-form-field>
           <mat-label class="myLabel">Mã khóa học *</mat-label>
-          <input formControlName="maKhoaHoc" matInput type="text" />
+          <input formControlName="maKhoaHoc" matInput type="text" 
+          [readonly]="disableMaKhoaHoc"/>
           <mat-error
             *ngIf="
               courseService.courseForm.controls['maKhoaHoc'].errors?.required
@@ -38,12 +55,11 @@
           <mat-label class="myLabel">Danh mục khóa học *</mat-label>
           <mat-select
             formControlName="maDanhMucKhoaHoc"
-            [(ngModel)]="danhMucDaChon"
             name="maDanhMucKhoaHoc"
             placeholder="Danh mục khóa học"
           >
             <mat-option
-              *ngFor="let item of listDanhMuc; let stt = index"
+              *ngFor="let item of danhMuc.listDanhMuc"
               [value]="item.maDanhMuc"
             >
               {{ item.tenDanhMuc }}
@@ -82,6 +98,12 @@
           <mat-label class="myLabel">Lượt xem</mat-label>
           <input formControlName="luotXem" matInput type="number" min="0" />
           <mat-error
+            *ngIf="
+              courseService.courseForm.controls['luotXem'].errors?.required
+            "
+            >Vui lòng nhập lượt xem</mat-error
+          >
+          <mat-error
             *ngIf="courseService.courseForm.controls['luotXem'].errors?.min"
             >Lượt xem phải lớn hơn hoặc bằng 0</mat-error
           >
@@ -99,6 +121,12 @@
             min="0"
             max="5"
           />
+          <mat-error
+            *ngIf="
+              courseService.courseForm.controls['danhGia'].errors?.required
+            "
+            >Vui lòng nhập đánh giá</mat-error
+          >
           <mat-error
             *ngIf="courseService.courseForm.controls['danhGia'].errors?.min"
             >Đánh giá phải từ 0 đến 5</mat-error
@@ -129,18 +157,26 @@
           >
         </mat-form-field>
         <mat-form-field>
-          <mat-label class="myLabel">Chọn ngày tạo</mat-label>
-          <input matInput [matDatepicker]="dp3" disabled />
-          <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
-          <mat-datepicker #dp3 disabled="false"></mat-datepicker>
-          <mat-error>Vui lòng chọn ngày tạo</mat-error>
+          <mat-label class="myLabel">Nhập ngày tạo *</mat-label>
+          <input formControlName="ngayTao" matInput [matDatepicker]="picker" type="text" />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error>Vui lòng nhập ngày hợp lệ</mat-error>
         </mat-form-field>
       </div>
     </mat-grid-tile>
   </mat-grid-list>
   <div class="d-flex justify-content-end">
-    <button class="mr-2 myBtn submitBtn" mat-raised-button type="submit">
-      Thêm
+    <button
+      class="mr-2 myBtn submitBtn"
+      mat-raised-button
+      type="submit"
+    >
+    {{
+      courseService.courseForm.controls["$key"].value === "edit"
+        ? "Lưu"
+        : "Thêm"
+    }}
     </button>
     <button class="myBtn" mat-raised-button color="warn" (click)="onClear()">
       Xóa

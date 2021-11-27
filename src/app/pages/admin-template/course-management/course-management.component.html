@@ -68,9 +68,9 @@
               <td>{{ course.ngayTao }}</td>
               <td>{{ course.nguoiTao }}</td>
               <td>
-                <button mat-stroked-button class="table-btn mr-1">
+                <button mat-stroked-button class="table-btn mr-1" (click)="onEdit(course)">
                   <mat-icon>create</mat-icon></button
-                ><button mat-stroked-button class="table-btn deleteBtn">
+                ><button mat-stroked-button class="table-btn deleteBtn" (click)="deleteCourse(course.maKhoaHoc)">
                   <mat-icon>delete_outline</mat-icon>
                 </button>
               </td>
