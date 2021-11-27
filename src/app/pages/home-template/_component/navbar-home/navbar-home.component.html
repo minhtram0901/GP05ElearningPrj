@@ -1,11 +1,11 @@
-<header class="header">
-  <div routerLink="/" class="header-logo">
+<header class="header container-fluid">
+  <div routerLink="/" class="header-logo col-md-2">
       <img src="https://cybersoft.edu.vn/wp-content/uploads/2017/03/MIN-OP1.png" alt="">
   </div>
-  <div class="header-menu">
+  <div class="header-menu  col-md-2">
       <div class="header-menu-list">
             <mat-icon>menu</mat-icon>
-          <span>Danh mục khóa học</span>
+          <span style="font-size:medium;">Danh mục khóa học</span>
       </div>
       <div class="header-menu-item">
           <div class="header-menu-item-content">
@@ -14,14 +14,14 @@
       </div>
 
   </div>
-  <div class="header-search">
-      <input #searchCourse (input)="onInput(searchCourse.value)" type="text" placeholder="Tìm Khóa Học">
+  <div class="header-search  col-md-5">
+      <input #searchCourse (input)="onInput(searchCourse.value)" type="text" placeholder="Tìm Khóa Học"  style="font-size:medium;">
   </div>
-  <div *ngIf="!userLogin; else headerHaveUser" class="header-user">
-      <button class="header-user-reg" data-toggle="modal" data-target="#modalRegister">
+  <div *ngIf="!userLogin; else headerHaveUser" class="header-user  col-md-3">
+      <button class="header-user-reg btn btn-outline-dark" data-toggle="modal" data-target="#modalRegister" style="width: 120px;">
           Đăng kí
       </button>
-      <button class="header-user-login"  data-toggle="modal" data-target="#modalLogin">
+      <button class="header-user-login btn btn-outline-dark"  data-toggle="modal" data-target="#modalLogin" style="width: 120px;">
           Đăng nhập
       </button>
   </div>
@@ -31,10 +31,10 @@
 
   <ng-template #headerHaveUser>
     <div class="header-user">
-        <button routerLink="profile" class="header-user-reg">
+        <button routerLink="profile" class="header-user-reg btn btn-outline-dark" style="width: 120px;">
             Thông tin
         </button>
-        <button (click)="handleLogout()" class="header-user-login">
+        <button (click)="handleLogout()" class="header-user-login btn btn-outline-dark" style="width: 120px;">
             Đăng xuất
         </button>
     </div>
