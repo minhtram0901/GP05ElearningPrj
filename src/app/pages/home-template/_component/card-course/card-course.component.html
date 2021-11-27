@@ -1,6 +1,6 @@
 <div class="card" style="height: 100%; ">
-  <img class="card-img-top" [src]="course?.hinhAnh" alt="" style="width: 100%; height: 200px; object-fit: cover"
-    appImgError />
+  <img routerLink="/detail/{{course?.maKhoaHoc}}" class="card-img-top" [src]="course?.hinhAnh" alt=""
+    style="width: 100%; height: 200px; object-fit: cover; cursor:pointer;" appImgError />
   <div class="card-body">
     <p class="card-text">{{ course?.nguoiTao?.hoTen }}</p>
     <h3 class="m-0">
