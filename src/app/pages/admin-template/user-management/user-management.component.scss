@@ -1,25 +1,61 @@
 .page {
-    color: white;
-    padding: 0 1rem;
-    background: #f1f5f9;
-    &__box {
-      min-height: 120px;
-      background: #1e293b;
-      margin: 0 -1rem;
-      font-size: 36px;
-    }
-    &__content {
-      min-height: calc(100vh - 178px);
-      border-radius: 10px;
-      margin-top: -2rem;
-      background: white;
-      color: black;
-      font-size: 2rem;
-      &-data {
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
-    }
+  color: white;
+  padding: 0 1rem;
+  background: #f1f5f9;
+  &__box {
+    min-height: 90px;
+    background: #1e293b;
+    margin: 0 -1rem;
+    font-size: 36px;
   }
-  
+  &__content {
+    min-height: calc(100vh - 178px);
+    border-radius: 10px;
+    margin-top: -2rem;
+    background: white;
+    color: black;
+    font-size: 0.7rem;
+  }
+}
+.page__content-data {
+  width: 100%;
+}
+table {
+  table-layout: fixed;
+  word-wrap: break-word;
+  display: block;
+  height: 280px;
+  overflow-y: auto;
+}
+
+.table-btn {
+  min-width: 35px !important;
+  width: 35px !important;
+  padding: 0;
+}
+.table-btn:focus {
+  outline: none;
+}
+
+.table-container {
+  // height: 231px;
+  border: 1px solid #cccccc;
+  margin-bottom: 15px;
+}
+
+.addUserBtn {
+  // border: 1px solid #1e293b;
+  box-shadow: 2px 2px 5px #1e293b;
+}
+
+.addUserBtn:focus {
+  outline: none;
+}
+
+.material-icons {
+  vertical-align: -4px !important; /*Change this to adjust the icon*/
+}
+
+.deleteBtn {
+  color: rgba(255, 0, 0, 0.8);
+}

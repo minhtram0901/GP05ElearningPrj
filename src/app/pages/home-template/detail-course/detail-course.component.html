@@ -1,1 +1,48 @@
-<p>detail-course works!</p>
+
+
+<div class="detail">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="d-lg-flex">
+          <div class="mr-lg-4">
+            <img
+              class="detail-img d-block mx-auto"
+              appImgError
+              [src]="course?.hinhAnh"
+              alt=""
+            />
+          </div>
+          <div class="mt-4 mt-lg-0">
+            <h1>{{ course?.tenKhoaHoc }}</h1>
+            <p>{{ course?.moTa | shortcut: 500 }}</p>
+            <div>
+              <div class="d-flex align-items-center">
+                <mat-icon class="mr-1">supervised_user_circle</mat-icon>
+                <span>{{ course?.soLuongHocVien }}</span>
+              </div>
+              <div class="d-flex align-items-center">
+                <mat-icon class="mr-1">remove_red_eye</mat-icon>
+                <span>{{ course?.luotXem }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <div class="list-course-relate">
+    <h2 class="heading-relate">Các khóa học liên quan</h2>
+    <div class="row">
+      <div
+        *ngFor="let course of listCourse?.slice(0,8)"
+        class="col-sm-6 col-lg-3 p-2"
+      >
+        <app-card-course
+        [course]="course">
+        </app-card-course>
+      </div>
+    </div>
+
+  </div>
+  </div>
+</div>

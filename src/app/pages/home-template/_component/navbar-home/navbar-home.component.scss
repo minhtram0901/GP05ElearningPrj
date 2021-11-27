@@ -1,0 +1,130 @@
+.header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 80px;
+
+  &-logo {
+    width: 200px;
+    cursor: pointer;
+    @media (max-width: 1023px) {
+      width: 100px;
+    }
+    @media (max-width: 736px) {
+      width: 120px;
+    }
+    img {
+      width: 100%;
+    }
+  }
+  &-menu {
+    position: relative;
+    @media (max-width: 736px) {
+      display: none;
+    }
+    &-mobile {
+      display: none;
+      position: relative;
+      @media (max-width: 736px) {
+        display: block;
+        font-size: 30px;
+        &:hover &-item {
+          display: block;
+        }
+      }
+      &-item {
+        width: 100px;
+        background-color: red;
+        position: absolute;
+        right: 0;
+        padding: 10px;
+        display: none;
+        &-text {
+          font-size: 14px;
+          &:hover {
+            color: #fff;
+          }
+        }
+      }
+    }
+    &-list {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      cursor: pointer;
+      i {
+        font-size: 45px;
+        @media (max-width: 1023px) {
+          font-size: 20px;
+        }
+      }
+      span {
+        font-size: 18px;
+        cursor: pointer;
+        @media (max-width: 1023px) {
+          font-size: 13px;
+        }
+      }
+    }
+    &:hover &-item {
+      display: block;
+    }
+    &-item {
+      position: absolute;
+      z-index: 1;
+      background-color: red;
+      width: 200px;
+      padding: 10px;
+      display: none;
+      cursor: pointer;
+      &-text {
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+  }
+  &-search {
+    width: 750px;
+    height: 40px;
+    @media (max-width: 1023px) {
+      width: 300px;
+      height: 30px;
+      font-size: 14px;
+    }
+    @media (max-width: 736px) {
+      display: none;
+    }
+    input {
+      width: 100%;
+      height: 100%;
+      padding: 0 10px;
+    }
+  }
+  &-user {
+    @media (max-width: 736px) {
+      display: flex;
+    }
+    &-reg {
+      margin-right: 20px;
+      cursor: pointer;
+      @media (max-width: 1023px) {
+        margin-right: 10px;
+        font-size: 14px;
+      }
+      @media (max-width: 736px) {
+        margin-right: 6px;
+        font-size: 12px;
+      }
+    }
+    &-login {
+      cursor: pointer;
+      @media (max-width: 1023px) {
+        font-size: 14px;
+      }
+      @media (max-width: 736px) {
+        font-size: 12px;
+      }
+    }
+  }
+}

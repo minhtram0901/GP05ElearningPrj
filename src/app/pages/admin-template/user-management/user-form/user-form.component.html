@@ -1,0 +1,110 @@
+<mat-toolbar class="formToolbar d-flex justify-content-between">
+  <span>{{userService.userForm.controls['$key'].value==='edit'?"Chỉnh sửa thông tin người dùng":"Thêm mới người dùng"}}</span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1"><mat-icon>clear</mat-icon></button>
+</mat-toolbar>
+<form
+  [formGroup]="userService.userForm"
+  class="normal-form"
+  (submit)="onSubmit()"
+>
+  <mat-grid-list cols="2" rowHeight="300px">
+    <mat-grid-tile>
+      <div class="controles-container">
+        <input type="hidden" formControlName="$key" />
+        <mat-form-field>
+          <mat-label class="myLabel">Tài khoản *</mat-label>
+          <input formControlName="taiKhoan" matInput type="text" />
+          <mat-error
+            *ngIf="userService.userForm.controls['taiKhoan'].errors?.required"
+            >Vui lòng nhập tài khoản</mat-error
+          >
+          <mat-error
+            *ngIf="userService.userForm.controls['taiKhoan'].errors?.minlength"
+            >Tài khoản dài hơn 7 ký tự</mat-error
+          >
+          <mat-error
+            *ngIf="userService.userForm.controls['taiKhoan'].errors?.maxlength"
+            >Tài khoản không quá 30 ký tự</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label class="myLabel">Mật khẩu *</mat-label>
+          <input formControlName="matKhau" matInput type="password" />
+          <mat-error
+            *ngIf="userService.userForm.controls['matKhau'].errors?.required"
+            >Vui lòng nhập mật khẩu</mat-error
+          >
+          <mat-error
+            *ngIf="userService.userForm.controls['matKhau'].errors?.minlength"
+            >Mật khẩu dài hơn 7 ký tự</mat-error
+          >
+          <mat-error
+            *ngIf="userService.userForm.controls['matKhau'].errors?.maxlength"
+            >Mật khẩu không quá 30 ký tự</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label class="myLabel">Họ tên *</mat-label>
+          <input formControlName="hoTen" matInput type="text" />
+          <mat-error
+            *ngIf="userService.userForm.controls['hoTen'].errors?.required"
+            >Vui lòng nhập họ tên</mat-error
+          >
+          <mat-error
+            *ngIf="userService.userForm.controls['hoTen'].errors?.minlength"
+            >Họ tên dài hơn 1 ký tự</mat-error
+          >
+        </mat-form-field>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="controles-container">
+        <mat-form-field>
+          <mat-label class="myLabel">Số điện thoại *</mat-label>
+          <input formControlName="soDT" matInput type="text" />
+          <mat-error
+            *ngIf="userService.userForm.controls['soDT'].errors?.required"
+            >Vui lòng nhập số điện thoại</mat-error
+          >
+          <mat-error
+            *ngIf="
+              userService.userForm.controls['soDT'].errors?.minlength ||
+              userService.userForm.controls['soDT'].errors?.pattern
+            "
+            >Số điện thoại không hợp lệ</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label class="myLabel">Email *</mat-label>
+          <input formControlName="email" matInput type="mail" />
+          <mat-error
+            *ngIf="userService.userForm.controls['email'].errors?.required"
+            >Vui lòng nhập email</mat-error
+          >
+          <mat-error
+            *ngIf="userService.userForm.controls['email'].errors?.email"
+            >Email không hợp lệ</mat-error
+          >
+        </mat-form-field>
+        <label class="myLabel">Loại người dùng</label>
+        <mat-radio-group formControlName="maLoaiNguoiDung">
+          <mat-radio-button value="GV">Giáo vụ</mat-radio-button>
+          <mat-radio-button value="HV">Học viên</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <div class="d-flex justify-content-end">
+    <button
+      class="mr-2 myBtn submitBtn"
+      mat-raised-button
+      type="submit"
+      [disabled]="userService.userForm.invalid"
+    >
+      OK
+    </button>
+    <button class="myBtn" mat-raised-button color="warn" (click)="onClear()">
+      Xóa
+    </button>
+  </div>
+</form>

@@ -1,0 +1,39 @@
+
+<div class="search-page">
+  <div style="background-color: #333;" class="py-4">
+    <div class="container text-center">
+      <h2 class="text-white m-0" >{{title | uppercase}}</h2>
+    </div>
+  </div>
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-12">
+      </div>
+
+        <div *ngFor="let course of listCourse?.slice(infoPagination?.itemStart, infoPagination?.itemEnd)" class="col-sm-6 col-lg-3 p-2">
+          <app-card-course [course]="course"></app-card-course>
+        </div>
+
+
+    </div>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li (click)="prevPage(infoPagination?.currentPage)" class="page-item">
+          <a class="page-link" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="page-item"  *ngFor="let item of infoPagination?.totalPages"
+        [ngClass]="{active: item + 1 === infoPagination?.currentPage}"
+        (click)="goToPage(item)"
+        ><a class="page-link">{{item + 1}}</a></li>
+        <li (click)="nextPage(infoPagination?.currentPage)" class="page-item">
+          <a class="page-link" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+</div>

@@ -1,0 +1,24 @@
+
+<div class="search-page py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h4 *ngIf="listCourse; else titleSearch">
+          Tìm thấy {{ listCourse?.length }} khóa học với {{ valueSearch }}
+        </h4>
+
+        <ng-template #titleSearch>
+          <h4>
+            Không tìm thấy khóa học với từ khóa <strong> {{ valueSearch }}</strong
+            >!
+          </h4>
+        </ng-template>
+      </div>
+
+        <div *ngFor="let course of this.listCourse" class="col-sm-6 col-lg-3 p-2">
+          <app-card-course [course]="course"></app-card-course>
+        </div>
+    </div>
+  </div>
+
+</div>

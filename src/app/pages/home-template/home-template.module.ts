@@ -3,17 +3,18 @@ import { CommonModule } from '@angular/common';
 
 import { HomeTemplateRoutingModule } from './home-template-routing.module';
 import { HomeTemplateComponent } from './home-template.component';
-import { NavbarHomeComponent } from './_component/navbar-home/navbar-home.component';
+import { HomeComponentModule } from './_component/home-component.module';
+
 
 
 @NgModule({
   declarations: [
     HomeTemplateComponent,
-    NavbarHomeComponent
   ],
   imports: [
     CommonModule,
-    HomeTemplateRoutingModule
+    HomeTemplateRoutingModule,
+    HomeComponentModule
   ]
 })
 export class HomeTemplateModule { }

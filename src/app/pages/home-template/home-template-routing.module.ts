@@ -35,6 +35,20 @@ const routes: Routes = [
         loadChildren: () =>
           import('./my-page/my-page.module').then((m) => m.MyPageModule),
       },
+      // search-page
+      {
+        path: "search",
+        loadChildren: () =>
+          import("./search/search.module").then(m => m.SearchModule)
+      },
+      {
+        path: "category/:id",
+        loadChildren: () => import("./category/category.module").then(m => m.CategoryModule)
+      },
+      {
+        path: 'profile',
+        loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)
+      }
     ],
   },
 ];
@@ -43,4 +57,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class HomeTemplateRoutingModule {}
+export class HomeTemplateRoutingModule { }

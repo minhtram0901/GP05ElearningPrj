@@ -1,0 +1,214 @@
+<div class="py-5">
+  <div class="container">
+
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <a
+              class="nav-link active"
+              id="home-tab"
+              data-toggle="tab"
+              href="#home"
+              role="tab"
+              aria-controls="home"
+              aria-selected="true"
+              >Thông tin cá nhân</a
+            >
+          </li>
+          <li class="nav-item" role="presentation">
+            <a
+              class="nav-link"
+              id="profile-tab"
+              data-toggle="tab"
+              href="#profile"
+              role="tab"
+              aria-controls="profile"
+              aria-selected="false"
+              >Khóa học của tôi</a
+            >
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div
+            class="tab-pane fade show active"
+            id="home"
+            role="tabpanel"
+            aria-labelledby="home-tab"
+          >
+            <form #formCommon="ngForm" (ngSubmit)="onSubmit(formCommon.value)">
+              <h3 class="text-danger text-center">
+                {{ error?.error }}
+              </h3>
+
+              <div class="form-group">
+                <label for="">Tài khoản:</label>
+                <input
+                  type="text"
+                  name="taiKhoan"
+                  class="form-control"
+                  placeholder=""
+                  aria-describedby="helpId"
+                  [(ngModel)]="userEdit.taiKhoan"
+                  #taiKhoan="ngModel"
+                  required
+                  minlength="6"
+                  maxlength="24"
+                  [disabled]="true"
+                />
+                <div
+                  class="text-danger"
+                  *ngIf="
+                    taiKhoan.errors && (taiKhoan.touched || taiKhoan.dirty)
+                  "
+                >
+                  <div *ngIf="taiKhoan.errors?.['required']">
+                    Vui lòng nhập vào tài khoản
+                  </div>
+                  <div
+                    *ngIf="taiKhoan.errors?.['minlength'] || taiKhoan.errors?.['maxlength']"
+                  >
+                    Vui lòng nhập từ 6 đến 24 ký tự
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="">Họ tên: </label>
+                <input
+                  type="text"
+                  name="hoTen"
+                  class="form-control"
+                  placeholder=""
+                  aria-describedby="helpId"
+                  [(ngModel)]="userEdit.hoTen"
+                  #hoTen="ngModel"
+                  required
+                  pattern="[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]*"
+                />
+                <div
+                  class="text-danger"
+                  *ngIf="hoTen.errors && (hoTen.touched || hoTen.dirty)"
+                >
+                  <div *ngIf="hoTen.errors?.['required']">
+                    Vui lòng nhập vào họ tên
+                  </div>
+                  <div *ngIf="hoTen.errors?.['pattern']">
+                    Tên không đúng định dạng
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="">Email:</label>
+                <input
+                  type="text"
+                  name="email"
+                  class="form-control"
+                  placeholder=""
+                  aria-describedby="helpId"
+                  [(ngModel)]="userEdit.email"
+                  #email="ngModel"
+                  required
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                />
+                <div
+                  class="text-danger"
+                  *ngIf="email.errors && (email.touched || email.dirty)"
+                >
+                  <div *ngIf="email.errors?.['required']">
+                    Vui lòng nhập vào email
+                  </div>
+                  <div *ngIf="email.errors?.['pattern']">
+                    Email không đúng định dạng
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="">Số điện thoại:</label>
+                <input
+                  type="text"
+                  name="soDT"
+                  class="form-control"
+                  placeholder=""
+                  aria-describedby="helpId"
+                  [(ngModel)]="userEdit.soDT"
+                  required
+                  #soDT="ngModel"
+                  pattern="(84|0[3|5|7|8|9])+([0-9]{8})\b"
+                />
+                <div
+                  class="text-danger"
+                  *ngIf="soDT.errors && (soDT.touched || soDT.dirty)"
+                >
+                  <div *ngIf="soDT.errors?.['required']">
+                    Vui lòng nhập vào số điện thoại
+                  </div>
+                  <div *ngIf="soDT.errors?.['pattern']">
+                    Số điện thoại không đúng định dạng
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="">Mật khẩu:</label>
+                <input
+                  type="password"
+                  name="matKhau"
+                  class="form-control"
+                  placeholder=""
+                  aria-describedby="helpId"
+                  #matKhau="ngModel"
+                  [(ngModel)]="userEdit.matKhau"
+                  required
+                  minlength="6"
+                  maxlength="32"
+                />
+                <div
+                  class="text-danger"
+                  *ngIf="matKhau.errors && (matKhau.touched || matKhau.dirty)"
+                >
+                  <div *ngIf="matKhau.errors?.['required']">
+                    Vui lòng nhập vào mật khẩu
+                  </div>
+                  <div
+                    *ngIf="matKhau.errors?.['minlength'] || matKhau.errors?.['maxlength']"
+                  >
+                    Vui lòng nhập từ 8 đến 32 ký tự
+                  </div>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                class="btn btn-warning"
+                [disabled]="formCommon.invalid"
+              >
+                Cập nhật
+              </button>
+            </form>
+          </div>
+          <div
+            class="tab-pane fade"
+            id="profile"
+            role="tabpanel"
+            aria-labelledby="profile-tab"
+          >
+            <div
+              *ngIf="
+                !userEdit?.chiTietKhoaHocGhiDanh?.length;
+                else listMyCourse
+              "
+            >
+              <div class="alert alert-danger">Bạn chưa có khóa học nào</div>
+            </div>
+
+            <ng-template #listMyCourse>
+              <div class="row">
+              <div
+                *ngFor="let course of userEdit?.chiTietKhoaHocGhiDanh"
+                class="col-sm-6 col-lg-3 p-2"
+              >
+                <app-card-course [course]="course"></app-card-course>
+              </div></div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+</div>

@@ -1,0 +1,19 @@
+.list-course {
+  margin: 60px;
+  p {
+    font-size: 20px;
+    padding-bottom: 10px;
+    font-weight: 400;
+  }
+  &-card {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 125px;
+    justify-content: space-around;
+  }
+}
+.img-card {
+  width: 285px;
+  height: 187px;
+  object-fit: cover;
+}

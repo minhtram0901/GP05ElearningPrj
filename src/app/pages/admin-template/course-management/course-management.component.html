@@ -1,9 +1,88 @@
 <div class="container-fluid page">
   <div class="d-flex page__box p-3 mt-2"></div>
-  <div class="page__content shadow p-3 position-relative">
-    <div class="page__content-data position-absolute text-center">
-      Course Management Content Goes Here
+  <div class="page__content shadow p-3">
+    <div class="page__content-data text-center">
+      <h3>Danh sách khóa học</h3>
+      <div class="d-flex align-items-center" style="width: 90%">
+        <button mat-stroked-button class="addCourseBtn" (click)="onCreate()">
+          <mat-icon>add</mat-icon>Thêm khóa học
+        </button>
+        <nav class="navbar" style="width: 60%">
+          <input
+            class="form-control"
+            type="text"
+            name="tenKhoaHoc"
+            [(ngModel)]="tenKhoaHoc"
+            (ngModelChange)="Search()"
+            placeholder="Tên khóa học"
+          />
+        </nav>
+      </div>
+      <div class="table-responsive table-container table table-sm">
+        <table class="table" matSort (matSortChange)="sortData($event)">
+          <thead class="thead-light">
+            <tr>
+              <th style="width: 40px" mat-sort-header="stt">STT</th>
+              <th style="width: 150px" mat-sort-header="danhMucKhoaHoc">
+                Danh mục khóa học
+              </th>
+              <th style="width: 100px" mat-sort-header="maKhoaHoc">
+                Mã khóa học
+              </th>
+              <th style="width: 100px" mat-sort-header="tenKhoaHoc">
+                Tên khóa học
+              </th>
+              <th style="width: 100px" mat-sort-header="biDanh">Bí danh</th>
+              <th style="width: 200px">Mô tả</th>
+              <th style="width: 70px" mat-sort-header="luotXem">Lượt xem</th>
+              <th style="width: 80px">Hình ảnh</th>
+              <th style="width: 100px" mat-sort-header="ngayTao">Ngày tạo</th>
+              <th style="width: 100px" mat-sort-header="nguoiTao">Người tạo</th>
+              <th style="width: 130px">Chỉnh sửa</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              style="text-align: left"
+              *ngFor="
+                let course of sortedData
+                  | paginate: { itemsPerPage: 5, currentPage: p };
+                let stt = index
+              "
+            >
+              <td>{{ course.stt + 1 }}</td>
+              <td>{{ course.danhMucKhoaHoc }}</td>
+              <td>{{ course.maKhoaHoc }}</td>
+              <td>{{ course.tenKhoaHoc }}</td>
+              <td>{{ course.biDanh }}</td>
+              <td>{{ course.moTa }}</td>
+              <td>{{ course.luotXem }}</td>
+              <td>
+                <img
+                  [src]="course.hinhAnh"
+                  [alt]="course.hinhAnh"
+                  style="width: 70px"
+                  onerror="this.onerror=null;this.src='../../../../assets/img/course-default.jpg';"
+                />
+              </td>
+              <td>{{ course.ngayTao }}</td>
+              <td>{{ course.nguoiTao }}</td>
+              <td>
+                <button mat-stroked-button class="table-btn mr-1">
+                  <mat-icon>create</mat-icon></button
+                ><button mat-stroked-button class="table-btn deleteBtn">
+                  <mat-icon>delete_outline</mat-icon>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <pagination-controls
+        (pageChange)="p = $event"
+        previousLabel="Trang trước"
+        nextLabel="Trang sau"
+      ></pagination-controls>
     </div>
-    
   </div>
 </div>

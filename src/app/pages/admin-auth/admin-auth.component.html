@@ -1,0 +1,71 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Đăng nhập</mat-card-title>
+    </mat-card-header>
+
+    <form
+      #adminLoginForm="ngForm"
+      class="example-form"
+      (ngSubmit)="login(adminLoginForm.value)"
+    >
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input
+            matInput
+            placeholder="Username"
+            name="taiKhoan"
+            ngModel
+            required
+            #username="ngModel"
+            minlength="0"
+            maxlength="30"
+          />
+          <mat-error
+            class=""
+            *ngIf="username.errors && (username.dirty || username.touched)"
+          >
+            <!-- check null -->
+            <div *ngIf="username.errors.required">Vui lòng nhập tài khoản</div>
+            <!-- check length -->
+            <div *ngIf="username.errors.minlength || username.errors.maxlength">
+              Tài khoản không tồn tại
+            </div>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input
+            type="password"
+            matInput
+            placeholder="Password"
+            name="matKhau"
+            ngModel
+            required
+            #password="ngModel"
+            minlength="0"
+            maxlength="64"
+          />
+          <mat-error
+            class=""
+            *ngIf="password.errors && (password.dirty || password.touched)"
+          >
+            <!-- check null -->
+            <div *ngIf="password.errors.required">Vui lòng nhập mật khẩu</div>
+            <!-- check length -->
+            <div *ngIf="password.errors.minlength || password.errors.maxlength">
+              Mật khẩu không hợp lệ
+            </div>
+          </mat-error>
+        </mat-form-field>
+      </mat-card-content>
+      <button
+        mat-stroked-button
+        class="btn-block"
+        [disabled]="!adminLoginForm.valid"
+      >
+        Đăng nhập
+      </button>
+    </form>
+  </mat-card>
+</div>
