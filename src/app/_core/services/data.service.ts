@@ -57,16 +57,19 @@ export class DataService {
   handleError(error: any) {
     switch (error.status) {
       case 300:
+        console.log("300", error);
         break;
 
       case 400:
+        console.log("400", error);
         break;
 
       case 500:
-        // alert(error.error);
+        console.log("500", error);
         break;
 
       default:
+        console.log("default", error);
         break;
     }
     return throwError(error);

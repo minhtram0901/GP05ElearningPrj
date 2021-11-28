@@ -8,14 +8,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./admin-auth.component.scss'],
 })
 export class AdminAuthComponent implements OnInit {
+  loginErr: string = '';
   constructor(private data: DataService, private router: Router) {}
-  taiKhoan: string = "";
+  taiKhoan: string = '';
   ngOnInit(): void {}
 
   login(user: any) {
-    this.data
-      .post('QuanLyNguoiDung/DangNhap', user)
-      .subscribe((result: any) => {
+    this.data.post('QuanLyNguoiDung/DangNhap', user).subscribe(
+      (result: any) => {
         if (result.maLoaiNguoiDung === 'GV') {
           // luu local storage
           localStorage.setItem('useradmin', JSON.stringify(result));
@@ -23,8 +23,12 @@ export class AdminAuthComponent implements OnInit {
           this.router.navigate(['/admin/dashboard']);
         } else {
           // thong bao
-          alert('Bạn không có quyền truy cập');
+          this.loginErr = 'Bạn không có quyền truy cập';
         }
-      });
+      },
+      (error: any) => {
+        this.loginErr = error.error;
+      }
+    );
   }
 }
