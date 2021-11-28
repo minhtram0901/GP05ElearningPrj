@@ -1,12 +1,12 @@
-<header class="header container-fluid">
-  <div routerLink="/" class="header-logo col-md-2">
+<header class="header container-fluid d-flex flex-wrap justify-content-start">
+  <div routerLink="/" class="header-logo col-lg-2 col-md-2">
     <img
       style="height: 80%"
       src="https://cybersoft.edu.vn/wp-content/uploads/2017/03/MIN-OP1.png"
       alt=""
     />
   </div>
-  <div class="header-menu col-md-2">
+  <div class="header-menu col-lg-2 col-md-12">
     <div class="header-menu-list d-flex justify-content-start">
       <mat-icon>menu</mat-icon>
       <span>Danh mục khóa học</span>
@@ -23,7 +23,7 @@
       </div>
     </div>
   </div>
-  <div class="header-search col-md-5">
+  <div class="header-search col-lg-5 col-md-12">
     <input
       #searchCourse
       (input)="onInput(searchCourse.value)"
@@ -32,12 +32,15 @@
       style="font-size: medium"
     />
   </div>
-  <div *ngIf="!userLogin; else headerHaveUser" class="header-user col-md-3">
+  <div
+    *ngIf="!userLogin; else headerHaveUser"
+    class="header-user col-lg-3 col-md-12"
+  >
     <button
       class="header-user-reg btn btn-outline-dark"
       data-toggle="modal"
       data-target="#modalRegister"
-      style="width: 120px"
+      
     >
       Đăng kí
     </button>
@@ -45,7 +48,6 @@
       class="header-user-login btn btn-outline-dark"
       data-toggle="modal"
       data-target="#modalLogin"
-      style="width: 120px"
     >
       Đăng nhập
     </button>
@@ -56,14 +58,12 @@
       <button
         routerLink="profile"
         class="header-user-reg btn btn-outline-dark"
-        style="width: 120px"
       >
         Tài khoản
       </button>
       <button
         (click)="handleLogout()"
         class="header-user-login btn btn-outline-dark"
-        style="width: 120px"
       >
         Đăng xuất
       </button>

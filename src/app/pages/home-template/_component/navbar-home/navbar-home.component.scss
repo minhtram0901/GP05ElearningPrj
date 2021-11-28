@@ -5,6 +5,23 @@
   height: 100px;
   border-bottom: 2px solid rgb(173, 147, 3);
   background-color: white;
+  @media (max-width: 1024px) {
+    height: 160px;
+  }
+  @media (max-width: 736px) {
+    height: 100px;
+  }
+  @media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation: portrait) {
+    height: 140px;
+  }
+  /*iPhone 6 landscape*/
+  @media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation: landscape) {
+    height: 130px;
+  }
+  /*iPhone 6+ landscape*/
+  @media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (orientation: landscape) {
+    height: 170px;
+  }
   &-logo {
     width: 200px;
     cursor: pointer;
@@ -23,10 +40,10 @@
     padding-left: 0 !important;
     padding-right: 0 !important;
     @media (max-width: 736px) {
-      display: none;
+      // display: none;
     }
     &-mobile {
-      display: none;
+      // display: none;
       position: relative;
       @media (max-width: 736px) {
         display: block;
@@ -67,6 +84,9 @@
         @media (max-width: 1023px) {
           font-size: 13px;
         }
+        @media only screen and (min-device-width: 768px) and (max-device-width: 1023px) {
+          font-size: 13px;
+        }
       }
     }
     &:hover &-item {
@@ -93,13 +113,14 @@
   &-search {
     width: 750px;
     height: 40px;
+    padding-left: 0px !important;
     @media (max-width: 1023px) {
       width: 300px;
       height: 30px;
       font-size: 14px;
     }
     @media (max-width: 736px) {
-      display: none;
+      // display: none;
     }
     input {
       width: 100%;
@@ -108,6 +129,7 @@
     }
   }
   &-user {
+    padding-left: 0px !important;
     @media (max-width: 736px) {
       display: flex;
     }
@@ -116,21 +138,27 @@
       cursor: pointer;
       @media (max-width: 1023px) {
         margin-right: 10px;
-        font-size: 14px;
+        font-size: 12px;
+        width: 100px;
       }
       @media (max-width: 736px) {
         margin-right: 6px;
         font-size: 12px;
       }
+      font-size: 12px;
+      width: 90px;
     }
     &-login {
       cursor: pointer;
       @media (max-width: 1023px) {
-        font-size: 14px;
+        font-size: 12px;
+        width: 100px;
       }
       @media (max-width: 736px) {
         font-size: 12px;
       }
+      font-size: 12px;
+      width: 90px;
     }
   }
 }
