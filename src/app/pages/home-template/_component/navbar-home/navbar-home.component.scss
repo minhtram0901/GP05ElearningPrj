@@ -2,8 +2,9 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 80px;
-
+  height: 100px;
+  border-bottom: 2px solid rgb(173, 147, 3);
+  background-color: white;
   &-logo {
     width: 200px;
     cursor: pointer;
@@ -19,6 +20,8 @@
   }
   &-menu {
     position: relative;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
     @media (max-width: 736px) {
       display: none;
     }
@@ -34,7 +37,7 @@
       }
       &-item {
         width: 100px;
-        background-color: red;
+        background-color: rgba(51, 51, 51, 0.6);
         position: absolute;
         right: 0;
         padding: 10px;
@@ -81,7 +84,7 @@
       &-text {
         color: #fff;
         &:hover {
-          color: yellow; 
+          color: yellow;
           text-shadow: 2px 2px 2px yellowgreen;
         }
       }
