@@ -1,54 +1,84 @@
 <header class="header container-fluid">
   <div routerLink="/" class="header-logo col-md-2">
-      <img style="height: 80%;" src="https://cybersoft.edu.vn/wp-content/uploads/2017/03/MIN-OP1.png" alt="">
+    <img
+      style="height: 80%"
+      src="https://cybersoft.edu.vn/wp-content/uploads/2017/03/MIN-OP1.png"
+      alt=""
+    />
   </div>
-  <div class="header-menu  col-md-2">
-      <div class="header-menu-list d-flex justify-content-start">
-            <mat-icon>menu</mat-icon>
-          <span>Danh mục khóa học</span>
+  <div class="header-menu col-md-2">
+    <div class="header-menu-list d-flex justify-content-start">
+      <mat-icon>menu</mat-icon>
+      <span>Danh mục khóa học</span>
+    </div>
+    <div class="header-menu-item">
+      <div class="header-menu-item-content">
+        <p
+          (click)="handleClickCategory(category)"
+          *ngFor="let category of listCategory"
+          class="header-menu-item-text"
+        >
+          {{ category.tenDanhMuc }}
+        </p>
       </div>
-      <div class="header-menu-item">
-          <div class="header-menu-item-content">
-              <p  (click)="handleClickCategory(category)" *ngFor="let category of listCategory" class="header-menu-item-text">{{category.tenDanhMuc}}</p>
-          </div>
-      </div>
-
+    </div>
   </div>
-  <div class="header-search  col-md-5">
-      <input #searchCourse (input)="onInput(searchCourse.value)" type="text" placeholder="Tìm Khóa Học"  style="font-size:medium;">
+  <div class="header-search col-md-5">
+    <input
+      #searchCourse
+      (input)="onInput(searchCourse.value)"
+      type="text"
+      placeholder="Tìm Khóa Học"
+      style="font-size: medium"
+    />
   </div>
-  <div *ngIf="!userLogin; else headerHaveUser" class="header-user  col-md-3">
-      <button class="header-user-reg btn btn-outline-dark" data-toggle="modal" data-target="#modalRegister" style="width: 120px;">
-          Đăng kí
-      </button>
-      <button class="header-user-login btn btn-outline-dark"  data-toggle="modal" data-target="#modalLogin" style="width: 120px;">
-          Đăng nhập
-      </button>
+  <div *ngIf="!userLogin; else headerHaveUser" class="header-user col-md-3">
+    <button
+      class="header-user-reg btn btn-outline-dark"
+      data-toggle="modal"
+      data-target="#modalRegister"
+      style="width: 120px"
+    >
+      Đăng kí
+    </button>
+    <button
+      class="header-user-login btn btn-outline-dark"
+      data-toggle="modal"
+      data-target="#modalLogin"
+      style="width: 120px"
+    >
+      Đăng nhập
+    </button>
   </div>
-
-
-
 
   <ng-template #headerHaveUser>
     <div class="header-user">
-        <button routerLink="profile" class="header-user-reg btn btn-outline-dark" style="width: 120px;">
-            Thông tin
-        </button>
-        <button (click)="handleLogout()" class="header-user-login btn btn-outline-dark" style="width: 120px;">
-            Đăng xuất
-        </button>
+      <button
+        routerLink="profile"
+        class="header-user-reg btn btn-outline-dark"
+        style="width: 120px"
+      >
+        Tài khoản
+      </button>
+      <button
+        (click)="handleLogout()"
+        class="header-user-login btn btn-outline-dark"
+        style="width: 120px"
+      >
+        Đăng xuất
+      </button>
     </div>
   </ng-template>
 
   <div class="header-menu-mobile">
-      <i class='bx bx-menu'></i>
-      <div class="header-menu-mobile-item">
-          <div class="header-menu-mobile-content">
-              <p class="header-menu-mobile-item-text">Back End</p>
-              <p class="header-menu-mobile-item-text">Front End</p>
-              <p class="header-menu-mobile-item-text">Java Script</p>
-          </div>
+    <i class="bx bx-menu"></i>
+    <div class="header-menu-mobile-item">
+      <div class="header-menu-mobile-content">
+        <p class="header-menu-mobile-item-text">Back End</p>
+        <p class="header-menu-mobile-item-text">Front End</p>
+        <p class="header-menu-mobile-item-text">Java Script</p>
       </div>
+    </div>
   </div>
 </header>
 <app-modal-login></app-modal-login>
